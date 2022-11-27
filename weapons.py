@@ -15,7 +15,7 @@ class Weapon:
     def __str__(self):
         return self.__class__.__name__
     
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         """
         Calculate weapon passive stats based on dynamic stacks and current stats.
         """
@@ -48,12 +48,12 @@ class PJWS(Weapon):
             output += " (Stacked)"
         return output
 
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         atk_increase = self._stat(0.032, 0.007)
         bonus_dmg = self._stat(0.12, 0.03)
 
-        if num_stacks < 7 and not self.stacked:
-            return Stats(atk=num_stacks*atk_increase)
+        if num_hits < 7 and not self.stacked:
+            return Stats(atk=num_hits*atk_increase)
         else:
             return Stats(atk=7*atk_increase, bonus_dmg=bonus_dmg)
     
@@ -79,7 +79,7 @@ class Homa(Weapon):
             output += " (50%)"
         return output
 
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         atk_increase = self._stat(0.018, 0.004) if self.below50 else self._stat(0.008, 0.002)
         return Stats(flat_atk=atk_increase*stats.total_hp())
     
@@ -105,10 +105,10 @@ class Vortex(Weapon):
         stacked = "Stacked" if self.stacked else "Unstacked"
         return '{} ({}, {})'.format(super().__str__(), shielded, stacked)
 
-    def dynamic_stats(self, num_stacks, stats: Stats):
-        num_stacks = 5 if self.stacked else min(num_stacks, 5)
+    def dynamic_stats(self, num_hits, stats: Stats):
+        num_hits = 5 if self.stacked else min(num_hits, 5)
         atk_increase = self._stat(0.08, 0.02) if self.shielded else self._stat(0.04, 0.01)
-        return Stats(atk=num_stacks*atk_increase)
+        return Stats(atk=num_hits*atk_increase)
 
 class CalamityQueller(Weapon):
     """
@@ -128,18 +128,24 @@ class CalamityQueller(Weapon):
         stacked = "Stacked" if self.stacked else "Unstacked"
         return '{} ({})'.format(super().__str__(), stacked)
 
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         atk_increase = self._stat(0.032, 0.008)
-        if num_stacks >= 5 or self.stacked:
-            # 5th hit / 4th plunge onwards has full stacks.
+        if self.stacked:
             return Stats(atk=6*atk_increase)
-        elif num_stacks == 4:
-            # 4th hit / 3rd plunge has 5 stacks.
-            return Stats(atk=5*atk_increase)
-        else:
-            # nth hit has n stacks.
-            return Stats(atk=num_stacks*atk_increase)
 
+        # Calamity stack mapping based on hits so far.
+        if num_hits == 2 or num_hits == 3:
+            # 1st plunge = 2 stacks
+            # 2nd plunge = 3 stacks
+            return Stats(atk=num_hits*atk_increase)
+        elif num_hits == 4:
+            # 3rd plunge = 5 stacks
+            return Stats(atk=5*atk_increase)
+        elif num_hits > 4:
+            # 4th plunge and onwards = 6 stacks   
+            return Stats(atk=6*atk_increase) 
+        else:
+            return Stats()
 
 class SkywardSpine(Weapon):
     """
@@ -171,7 +177,7 @@ class Lithic(Weapon):
     def __str__(self):
         return '{} ({} Stacks)'.format(super().__str__(), self.stacks)
     
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         atk_increase = self._stat(0.07, 0.01) * self.stacks
         crate_increase = self._stat(0.03, 0.01) * self.stacks
         return Stats(atk=atk_increase, crate=crate_increase)
@@ -195,7 +201,7 @@ class Deathmatch(Weapon):
         num_opponents = "1 Opponent" if self.num_opponents < 2 else "2+ Opponents"
         return '{} ({})'.format(super().__str__(), num_opponents)
     
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         atk_increase = self._stat(0.24, 0.06) if self.num_opponents < 2 else self._stat(0.16, 0.04)
         return Stats(atk=atk_increase)
 
@@ -217,7 +223,7 @@ class Blackcliff(Weapon):
     def __str__(self):
         return '{} ({} Stacks)'.format(super().__str__(), self.stacks)
     
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         atk_increase = self._stat(0.12, 0.03) * self.stacks
         return Stats(atk=atk_increase)
 
@@ -239,7 +245,7 @@ class MissiveWindspear(Weapon):
     def __str__(self):
         return '{} ({})'.format(super().__str__(), "On" if self.passive_active else "Off")
     
-    def dynamic_stats(self, num_stacks, stats: Stats):
+    def dynamic_stats(self, num_hits, stats: Stats):
         if self.passive_active:
             return Stats(atk=self._stat(0.12, 0.03))
         return Stats()

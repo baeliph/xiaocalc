@@ -10,7 +10,7 @@ class Stats:
     def __init__(
         self, base_atk=0.0, flat_atk=0.0, atk=0.0, base_hp=0.0, flat_hp=0.0,
         hp=0.0, em=0.0, crate=0.0, cdmg=0.0, anemo_dmg=0.0, bonus_dmg=0.0,
-        res_shred=0.0
+        res_shred=0.0, flat_dmg=0.0
     ):
         self.base_atk = base_atk
         self.flat_atk = flat_atk
@@ -24,6 +24,7 @@ class Stats:
         self.anemo_dmg = anemo_dmg
         self.bonus_dmg = bonus_dmg
         self.res_shred = res_shred
+        self.flat_dmg = flat_dmg
 
     def __add__(self, other):
         return Stats(
@@ -38,7 +39,8 @@ class Stats:
             self.cdmg + other.cdmg,
             self.anemo_dmg + other.anemo_dmg,
             self.bonus_dmg + other.bonus_dmg,
-            self.res_shred + other.res_shred
+            self.res_shred + other.res_shred,
+            self.flat_dmg + other.flat_dmg
         )
 
     def __iadd__(self, other):
@@ -54,6 +56,7 @@ class Stats:
         self.anemo_dmg += other.anemo_dmg
         self.bonus_dmg += other.bonus_dmg
         self.res_shred += other.res_shred
+        self.flat_dmg += other.flat_dmg
         return self
     
     def __str__(self):
@@ -69,10 +72,6 @@ class Stats:
     def total_atk(self):
         """Returns the total ATK."""
         return self.base_atk * (1 + self.atk) + self.flat_atk
-
-    def effective_atk(self):
-        """Returns the effective ATK, factoring in crit stats."""
-        return self.total_atk() * (1 + self.crate * self.cdmg)
 
     def total_hp(self):
         """Returns the total HP."""

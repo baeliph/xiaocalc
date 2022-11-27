@@ -14,8 +14,8 @@ class Buff:
     def __str__(self):
         return self.__class__.__name__
 
-    def buff(self, num_plunge=0):
-        """Returns the Buff's stats if active based on the current plunge."""
+    def buff(self, num_plunge=0, num_skill=0):
+        """Returns the Buff's stats if active based on the current plunge or skill."""
         if self.duration == 0 or num_plunge <= self.duration:
             return self.active()
         return Stats()
@@ -96,5 +96,12 @@ class FaruzanC6(Buff):
     TODO: Implement A4 flat damage increase.
     """
 
-    def active(self):
-        return Stats(cdmg=0.40, anemo_dmg=0.383, res_shred=0.30)
+    def __init__(self, duration: int = 0, base_atk: int = 804):
+        super().__init__(duration)
+        self.base_atk = base_atk
+
+    def buff(self, num_plunge=0, num_skill=0):
+        if num_skill == 2:
+            # Faruzan's A4 flat dmg increase is on CD during Xiao's 2nd E.
+            return Stats(cdmg=0.40, anemo_dmg=0.383, res_shred=0.30)
+        return Stats(cdmg=0.40, anemo_dmg=0.383, res_shred=0.30, flat_dmg=0.32*self.base_atk)
