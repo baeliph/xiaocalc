@@ -3,7 +3,10 @@ from buffs import *
 from weapons import *
 from xiao import Xiao
 
+import csv
 from functools import partial
+import os
+import pandas as pd
 from tabulate import tabulate
 
 def rotation_dmg(weapon: Weapon, artifact: Artifact, buffs, verbose=False):
@@ -26,11 +29,82 @@ def rotation_dmg(weapon: Weapon, artifact: Artifact, buffs, verbose=False):
 
     return xiao.total_damage
 
+def optimize(num_subs: int, artifact_set, weapon: Weapon, buffs, verbose=False):
+    """
+    Optimize rotation damage across all substat combinations for given
+    artifact set, weapon, and buffs.
+
+    Returns:
+        (atk, crate, cdmg, max_dmg): optimal substat distribution and damage
+    """
+    max_dmg = -1
+    max_subs = ()
+    for crate in range(0, num_subs + 1):
+        for cdmg in range(0, num_subs - crate + 1):
+            atk = num_subs - crate - cdmg
+
+            artifact = artifact_set()
+            artifact.base_stats.add_artifact_subs(atk=atk, crate=crate, cdmg=cdmg)
+
+            dmg = rotation_dmg(weapon, artifact, buffs)
+            if verbose:
+                print('atk: {}, crate: {}, cdmg: {}, dmg: {}'.format(atk, crate, cdmg, dmg))
+            if dmg > max_dmg:
+                max_dmg = dmg
+                max_subs = (atk, crate, cdmg, max_dmg)
+    return max_subs
+
+def write_csv(directory, filename, data):
+    """
+    Write data as CSV to specified directory/filename.
+    """
+    filename = '{}/{}'.format(directory, filename)
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, "w", encoding='UTF8', newline='') as outfile:
+        writer = csv.writer(outfile)
+        writer.writerows(data)
+
+def main(num_subs, artifact_set, buff_combos, weapons):
+    for buffs in buff_combos:
+        # Output.
+        weapon_chart = [["Weapon", "R1", "R2", "R3", "R4", "R5"]]
+        optimal_substats = [['weapon', 'refine', 'atk', 'crate', 'cdmg']]
+        
+        for weapon in weapons:
+            weapon_name = str(weapon(1))
+            row = [weapon_name]
+            for refine in range(1, 6):
+                atk, crate, cdmg, dmg = optimize(num_subs, artifact_set, weapon(refine), buffs)
+                # Save results
+                optimal_substats.append([weapon_name, 'R{}'.format(refine), atk, crate, cdmg])
+                row.append(dmg)
+            weapon_chart.append(row)
+    
+        # Print weapon chart to stdout.
+        weapon_chart[1:] = sorted(weapon_chart[1:], key=lambda row: row[1], reverse=True)
+        print('\nBuffs: [{}]'.format(", ".join(map(str, buffs))))
+        print(tabulate(weapon_chart, headers='firstrow'))
+
+        # Save weapon chart and substat distributions to CSVs.
+        filename = '{}subs/{}.csv'.format(num_subs, "-".join(map(str, buffs)))
+        write_csv('charts', filename, weapon_chart)
+        write_csv('substats', filename, optimal_substats)
+
 if __name__ == '__main__':
-    header = ["Weapon", "R1", "R2", "R3", "R4", "R5"]
+    """
+    Configure your comparison parameters here.
+        num_subs: Number of artifact substats.
+        artifact_set: Artifact set.
+        buff_combos: Buff combinations. Each combo corresponds to one output chart.
+        weapons: List of weapons to compare for each chart.
+    """
+
+    num_subs = 20
+
+    artifact_set = Vermillion
 
     buff_combos = [
-        [],
+        [Solo()],
         [TTDS()],
         [Bennett(), Noblesse()],
         [TTDS(), Bennett(), Noblesse()],
@@ -62,18 +136,5 @@ if __name__ == '__main__':
         partial(MissiveWindspear, passive_active=False),
         partial(MissiveWindspear, passive_active=True)
     ]
-    
-    for buffs in buff_combos:
-        table = []
-        for weapon in weapons:
-            row = [str(weapon(1))]
-            for refine in range(1, 6):
-                weapon_with_refine = weapon(refine)
-                artifact = Vermillion(weapon_with_refine)
-                dmg = rotation_dmg(weapon_with_refine, artifact, buffs)
-                row.append(dmg)
-            table.append(row)
-    
-        table.sort(key=lambda row: row[1], reverse=True)
-        print('\nBuffs: [{}]'.format(", ".join(map(str, buffs))))
-        print(tabulate(table, headers=header))
+
+    main(num_subs, artifact_set, buff_combos, weapons)

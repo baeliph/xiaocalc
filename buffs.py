@@ -24,6 +24,10 @@ class Buff:
         """Returns the bonus stats when the buff is active."""
         return Stats()
     
+class Solo(Buff):
+    """
+    Solo. Dummy class to represent no buffs.
+    """
 
 class Bennett(Buff):
     """

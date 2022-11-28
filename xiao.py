@@ -98,7 +98,7 @@ class Xiao:
         enemy_res_mult = self._get_enemy_res_mult(effective_stats.res_shred)
         enemy_def_mult = (190 / (190 + 200))
         dmg = (effective_stats.total_atk() * modifier + effective_stats.flat_dmg) * \
-            (1 + effective_stats.crate * effective_stats.cdmg) * \
+            (1 + min(1.0, effective_stats.crate) * effective_stats.cdmg) * \
             (1 + effective_stats.anemo_dmg + effective_stats.bonus_dmg) * \
             enemy_res_mult * enemy_def_mult
         
