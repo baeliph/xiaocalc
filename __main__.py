@@ -64,7 +64,10 @@ def write_csv(directory, filename, data):
         writer = csv.writer(outfile)
         writer.writerows(data)
 
-def main(num_subs, artifact_set, buff_combos, weapons):
+def main(num_subs, artifact_set, buff_combos, weapons, extra_er_subs=False):
+    """
+    Generate charts for the given parameters.
+    """
     for buffs in buff_combos:
         # Output.
         weapon_chart = [["Weapon", "R1", "R2", "R3", "R4", "R5"]]
@@ -74,8 +77,20 @@ def main(num_subs, artifact_set, buff_combos, weapons):
             weapon_name = str(weapon(1))
             row = [weapon_name]
             for refine in range(1, 6):
-                atk, crate, cdmg, dmg = optimize(num_subs, artifact_set, weapon(refine), buffs)
-                # Save results
+                # Give ER weapons 5 extra subs.
+                bonus_subs = 0
+                if extra_er_subs and weapon(refine).base_stats.er > 0:
+                    bonus_subs = 5
+
+                # Get optimal substat distribution and max damage.
+                atk, crate, cdmg, dmg = optimize(
+                    num_subs + bonus_subs,
+                    artifact_set,
+                    weapon(refine),
+                    buffs
+                )
+
+                # Save results.
                 optimal_substats.append([weapon_name, 'R{}'.format(refine), atk, crate, cdmg])
                 row.append(dmg)
             weapon_chart.append(row)
@@ -86,7 +101,8 @@ def main(num_subs, artifact_set, buff_combos, weapons):
         print(tabulate(weapon_chart, headers='firstrow'))
 
         # Save weapon chart and substat distributions to CSVs.
-        filename = '{}subs/{}.csv'.format(num_subs, "-".join(map(str, buffs)))
+        er_name = "with_er" if extra_er_subs else "without_er"
+        filename = '{}subs/{}/{}.csv'.format(num_subs, er_name, "-".join(map(str, buffs)))
         write_csv('charts', filename, weapon_chart)
         write_csv('substats', filename, optimal_substats)
 
@@ -97,9 +113,10 @@ if __name__ == '__main__':
         artifact_set: Artifact set.
         buff_combos: Buff combinations. Each combo corresponds to one output chart.
         weapons: List of weapons to compare for each chart.
+        extra_er_subs: Set to True if you want ER weapons to get 5 extra subs.
     """
 
-    num_subs = 20
+    num_subs = 25
 
     artifact_set = Vermillion
 
@@ -122,6 +139,8 @@ if __name__ == '__main__':
         partial(Vortex, shielded=True, stacked=True),
         partial(CalamityQueller, stacked=False),
         partial(CalamityQueller, stacked=True),
+        partial(EngulfingLightning),
+        partial(StaffOfTheScarletSands),
         partial(SkywardSpine),
         partial(Lithic, stacks=1),
         partial(Lithic, stacks=2),
@@ -134,7 +153,13 @@ if __name__ == '__main__':
         partial(Blackcliff, stacks=2),
         partial(Blackcliff, stacks=3),
         partial(MissiveWindspear, passive_active=False),
-        partial(MissiveWindspear, passive_active=True)
+        partial(MissiveWindspear, passive_active=True),
+        partial(FavoniusLance),
+        partial(WavebreakersFin),
+        partial(PrototypeStarglitter),
+        partial(WhiteTassel)
     ]
 
-    main(num_subs, artifact_set, buff_combos, weapons)
+    extra_er_subs = False # Change to True if you want to give ER weapons +5 subs
+
+    main(num_subs, artifact_set, buff_combos, weapons, extra_er_subs)

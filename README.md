@@ -46,11 +46,14 @@ The numbers you see here assume perfect rolls for the individual weapons. A true
 ## Explaining Substat Rolls
 - Simulated manually via the 'damage' section on each subs page to find best DPR (damage per rotation). Balanced between Atk%, Crit Rate and Crit Damage, and capped at a maximum of 100% Crit Rate.
 
-- Artifacts are based on `num_subs` (default: 20) rolled stats, assuming best possible sub rolls per weapon.
+- Artifacts are based on 20/25 rolled stats, assuming best possible sub rolls per weapon.
 
-- Taken for 4pc Vermillion Hereafter. Other stats (e.g. HP, DEF, EM, ER), unless otherwise specified will be ignored.
+- Results in `charts/` and `substats/` are taken for 4pc Vermillion Hereafter.
 
-- All rolls are based on culminative amount of all 5 Artifacts with an expected outcome depending on how many substats were selected. Refer to 2.
+- Other stats (e.g. HP, DEF, EM, ER), unless otherwise specified, will be ignored.
+  - There is an option `extra_er_subs` that you can set to `True` in order to give all ER weapons 5 extra subs.
+
+- All rolls are based on culminative amount of all 5 Artifacts with an expected outcome depending on how many substats were selected. Refer to bullet 2.
 
 ## Additional Resources
 - [Xiao Weapon Comparison (verm ver.)](https://docs.google.com/spreadsheets/d/17wSBGoVTChPta3LNMEelSqJcTkX3JS8lo9XWlpeapWU/edit#gid=1335423325) by Felician#5771

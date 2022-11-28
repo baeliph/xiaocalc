@@ -49,11 +49,21 @@ CalamityQueller (Stacked),R2,0,17,8
 CalamityQueller (Stacked),R3,0,17,8
 CalamityQueller (Stacked),R4,0,17,8
 CalamityQueller (Stacked),R5,0,17,8
-SkywardSpine,R1,0,16,9
-SkywardSpine,R2,0,15,10
-SkywardSpine,R3,0,15,10
-SkywardSpine,R4,0,15,10
-SkywardSpine,R5,0,15,10
+EngulfingLightning,R1,0,19,11
+EngulfingLightning,R2,0,19,11
+EngulfingLightning,R3,0,19,11
+EngulfingLightning,R4,0,19,11
+EngulfingLightning,R5,0,19,11
+StaffOfTheScarletSands,R1,0,8,17
+StaffOfTheScarletSands,R2,0,8,17
+StaffOfTheScarletSands,R3,0,8,17
+StaffOfTheScarletSands,R4,0,8,17
+StaffOfTheScarletSands,R5,0,8,17
+SkywardSpine,R1,0,17,13
+SkywardSpine,R2,0,17,13
+SkywardSpine,R3,0,16,14
+SkywardSpine,R4,0,16,14
+SkywardSpine,R5,0,15,15
 Lithic (1 Stacks),R1,0,16,9
 Lithic (1 Stacks),R2,0,16,9
 Lithic (1 Stacks),R3,0,16,9
@@ -114,3 +124,23 @@ MissiveWindspear (On),R2,0,17,8
 MissiveWindspear (On),R3,0,17,8
 MissiveWindspear (On),R4,0,17,8
 MissiveWindspear (On),R5,0,17,8
+FavoniusLance,R1,0,19,11
+FavoniusLance,R2,0,19,11
+FavoniusLance,R3,0,19,11
+FavoniusLance,R4,0,19,11
+FavoniusLance,R5,0,19,11
+WavebreakersFin,R1,0,17,8
+WavebreakersFin,R2,0,17,8
+WavebreakersFin,R3,0,17,8
+WavebreakersFin,R4,0,17,8
+WavebreakersFin,R5,0,17,8
+PrototypeStarglitter,R1,0,19,11
+PrototypeStarglitter,R2,0,19,11
+PrototypeStarglitter,R3,0,19,11
+PrototypeStarglitter,R4,0,19,11
+PrototypeStarglitter,R5,0,19,11
+WhiteTassel,R1,0,13,12
+WhiteTassel,R2,0,13,12
+WhiteTassel,R3,0,13,12
+WhiteTassel,R4,0,13,12
+WhiteTassel,R5,0,13,12

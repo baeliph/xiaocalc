@@ -157,8 +157,51 @@ class SkywardSpine(Weapon):
 
     def __init__(self, refine: int = 1):
         super().__init__(refine)
-        self.base_stats = Stats(base_atk=674, crate=self._stat(0.08, 0.02))
+        self.base_stats = Stats(base_atk=674, crate=self._stat(0.08, 0.02), er=0.368)
 
+
+class EngulfingLightning(Weapon):
+    """
+    Engulfing Lightning.
+
+    Attributes:
+        refine: Weapon refinement. Must be between [1, 5].
+    """
+
+    def __init__(self, refine: int = 1):
+        super().__init__(refine)
+        self.base_stats = Stats(base_atk=608, er=0.551)
+    
+    def dynamic_stats(self, num_hits, stats: Stats):
+        active_er = stats.er
+        if num_hits > 1 and num_hits < 11:
+            # Extra ER for 12s after Burst.
+            active_er += self._stat(0.30, 0.05)
+        atk_increase = self._stat(0.28, 0.07) * active_er
+        return Stats(atk=atk_increase)
+
+
+class StaffOfTheScarletSands(Weapon):
+    """
+    Staff of the Scarlet Sands.
+
+    Attributes:
+        refine: Weapon refinement. Must be between [1, 5].
+    """
+
+    def __init__(self, refine: int = 1):
+        super().__init__(refine)
+        self.base_stats = Stats(base_atk=542, crate=0.441)
+    
+    def dynamic_stats(self, num_hits, stats: Stats):
+        atk_increase = self._stat(0.52, 0.13)
+        if num_hits == 1:
+            # Second E has 1 stack.
+            atk_increase += self._stat(0.28, 0.07)
+        elif num_hits > 1 and num_hits < 9:
+            # Plunges 1-7 have 2 stacks.
+            atk_increase += self._stat(0.28, 0.07)*2
+        return Stats(flat_atk=atk_increase * stats.em)
 
 class Lithic(Weapon):
     """
@@ -249,3 +292,55 @@ class MissiveWindspear(Weapon):
         if self.passive_active:
             return Stats(atk=self._stat(0.12, 0.03))
         return Stats()
+
+
+class WavebreakersFin(Weapon):
+    """
+    Wavebreaker's Fin.
+
+    Attributes:
+        refine: Weapon refinement. Must be between [1, 5].
+    """
+
+    def __init__(self, refine: int = 1):
+        super().__init__(refine)
+        self.base_stats = Stats(base_atk=620, atk=0.138)
+
+
+class FavoniusLance(Weapon):
+    """
+    Favonius Lance.
+
+    Attributes:
+        refine: Weapon refinement. Must be between [1, 5].
+    """
+
+    def __init__(self, refine: int = 1):
+        super().__init__(refine)
+        self.base_stats = Stats(base_atk=565, er=0.306)
+
+
+class PrototypeStarglitter(Weapon):
+    """
+    Prototype Starglitter.
+
+    Attributes:
+        refine: Weapon refinement. Must be between [1, 5].
+    """
+
+    def __init__(self, refine: int = 1):
+        super().__init__(refine)
+        self.base_stats = Stats(base_atk=510, er=0.459)
+
+
+class WhiteTassel(Weapon):
+    """
+    White Tassel.
+
+    Attributes:
+        refine: Weapon refinement. Must be between [1, 5].
+    """
+
+    def __init__(self, refine: int = 1):
+        super().__init__(refine)
+        self.base_stats = Stats(base_atk=401, crate=0.234)

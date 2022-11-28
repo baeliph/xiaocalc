@@ -94,10 +94,27 @@ class Zhongli(Buff):
     def active(self):
         return Stats(res_shred=0.20)
 
+class FaruzanC2(Buff):
+    """
+    C2 Faruzan. 32.4% Anemo DMG Bonus, 30% Anemo Res Shred.
+    Assumes Favonius Warbow for base ATK.
+    """
+
+    def __init__(self, duration: int = 0, base_atk: int = 650):
+        super().__init__(duration)
+        self.base_atk = base_atk
+
+    def buff(self, num_plunge=0, num_skill=0):
+        if num_skill == 2:
+            # Faruzan's A4 flat dmg increase is on CD during Xiao's 2nd E.
+            return Stats(anemo_dmg=0.324, res_shred=0.30)
+        return Stats(anemo_dmg=0.324, res_shred=0.30, flat_dmg=0.32*self.base_atk)
+
+
 class FaruzanC6(Buff):
     """
     C6 Faruzan. 40% Anemo Crit DMG, 38.3% Anemo DMG Bonus, 30% Anemo Res Shred.
-    TODO: Implement A4 flat damage increase.
+    Assumes Elegy for base ATK.
     """
 
     def __init__(self, duration: int = 0, base_atk: int = 804):

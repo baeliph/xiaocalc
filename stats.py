@@ -9,7 +9,7 @@ class Stats:
 
     def __init__(
         self, base_atk=0.0, flat_atk=0.0, atk=0.0, base_hp=0.0, flat_hp=0.0,
-        hp=0.0, em=0.0, crate=0.0, cdmg=0.0, anemo_dmg=0.0, bonus_dmg=0.0,
+        hp=0.0, em=0.0, er=0.0, crate=0.0, cdmg=0.0, anemo_dmg=0.0, bonus_dmg=0.0,
         res_shred=0.0, flat_dmg=0.0
     ):
         self.base_atk = base_atk
@@ -19,6 +19,7 @@ class Stats:
         self.flat_hp = flat_hp
         self.hp = hp
         self.em = em
+        self.er = er
         self.crate = crate
         self.cdmg = cdmg
         self.anemo_dmg = anemo_dmg
@@ -35,6 +36,7 @@ class Stats:
             self.flat_hp + other.flat_hp,
             self.hp + other.hp,
             self.em + other.em,
+            self.er + other.er,
             self.crate + other.crate,
             self.cdmg + other.cdmg,
             self.anemo_dmg + other.anemo_dmg,
@@ -51,6 +53,7 @@ class Stats:
         self.flat_hp += other.flat_hp
         self.hp += other.hp
         self.em += other.em
+        self.er += other.er
         self.crate += other.crate
         self.cdmg += other.cdmg
         self.anemo_dmg += other.anemo_dmg
@@ -77,7 +80,7 @@ class Stats:
         """Returns the total HP."""
         return self.base_hp * (1 + self.hp) + self.flat_hp
 
-    def add_artifact_subs(self, flat_atk=0, atk=0, flat_hp=0, hp=0, em=0, crate=0, cdmg=0):
+    def add_artifact_subs(self, flat_atk=0, atk=0, flat_hp=0, hp=0, em=0, er=0, crate=0, cdmg=0):
         """
         Adds the specified number of artifact subs to stats. Uses max roll value.
         """
@@ -86,10 +89,11 @@ class Stats:
         self.flat_hp += flat_hp * 298.75
         self.hp += hp * 0.0583
         self.em += em * 23.31
+        self.er += er * 0.0648
         self.crate += crate * 0.0389
         self.cdmg += cdmg * 0.0777
     
-    def add_mean_artifact_subs(self, flat_atk=0, atk=0, flat_hp=0, hp=0, em=0, crate=0, cdmg=0):
+    def add_mean_artifact_subs(self, flat_atk=0, atk=0, flat_hp=0, hp=0, em=0, er=0, crate=0, cdmg=0):
         """
         Adds the specified number of artifact subs to stats. Uses mean roll value.
         """
@@ -98,5 +102,6 @@ class Stats:
         self.flat_hp += flat_hp * 253.94
         self.hp += hp * 0.04955
         self.em += em * 19.82
+        self.er += er * 5.505
         self.crate += crate * 0.0331
         self.cdmg += cdmg * 0.0662
