@@ -15,17 +15,13 @@
 </div>
 
 ## How to Use
-- tabulate: `pip install tabulate`
-- pyyaml: `pip install pyyaml`
+Install required packages: `pip3 install -r requirements.txt`.
 
 To run the file, you can run either `python3 .` or `python3 __main__.py` from within the repo.
 
-## Disclaimer
-**This is a WIP.** The following remain to be implemented:
-- Different substat distributions per weapon per refine per buff combos.
-- Automatic optimal substat distribution calculation.
-- Engulfing Lightning, Staff of Scarlet Sands, other 4* spears.
+Weapon charts will be printed to your terminal, and weapon charts and substat distribution CSVs will be saved in `charts/` and `substats/`.
 
+## Disclaimer
 The numbers you see here assume perfect rolls for the individual weapons. A true comparison is dependent on your personal artifacts, and because of this some weapons on your Xiao will perform better/worse than what these tables display.
 
 ## Assumptions
@@ -50,7 +46,7 @@ The numbers you see here assume perfect rolls for the individual weapons. A true
 ## Explaining Substat Rolls
 - Simulated manually via the 'damage' section on each subs page to find best DPR (damage per rotation). Balanced between Atk%, Crit Rate and Crit Damage, and capped at a maximum of 100% Crit Rate.
 
-- Artifacts are based on 20 rolled stats (4 base + 5 level ups x 5 total artifacts) assuming best possible sub rolls per weapon.
+- Artifacts are based on `num_subs` (default: 20) rolled stats, assuming best possible sub rolls per weapon.
 
 - Taken for 4pc Vermillion Hereafter. Other stats (e.g. HP, DEF, EM, ER), unless otherwise specified will be ignored.
 
