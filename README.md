@@ -9,7 +9,13 @@
   <p align="center">
     Automatic generation of weapon comparison charts for Xiao.
     <br />
-    <a href="https://discord.gg/xiao"><strong>discord.gg/xiao</strong></a>
+    <br />
+    <a href="https://discord.gg/u5QS2tRHm6">
+      <img src="https://img.shields.io/discord/805680025776160768?color=4eb9a0&label=.gg%2Fxiao&logo=discord&style=for-the-badge" alt="Support"/>
+    </a>
+    <a href="https://www.reddit.com/r/XiaoMains/">
+      <img src="https://img.shields.io/reddit/subreddit-subscribers/XiaoMains?color=4eb9a0&label=r%2FXiaoMains&logo=reddit&logoColor=%4eb9a0&style=for-the-badge" alt="Reddit"/>
+    </a>
     <br />
   </p>
 </div>
@@ -35,13 +41,15 @@ The numbers you see here assume perfect rolls for the individual weapons. A true
 - 2 Elemental Skills and 12 High Plunges.
 
 ### Weapons
+- Calamity Queller has 2 stacks on 1st plunge, 3 stacks on 2nd plunge, 5 stacks on 3rd plunge, and max stacks for the rest.
+- Staff of the Scarlet Sands has 1 stack for the second Skill and 2 stacks for plunges 1-7.
 - 100% Passive Uptime taken for Shifting Windblade (On)
 
 ### Buffs
 - Bennett: 865 Base T13. Duration: 7 plunges.
 - TTDS: Duration: 7 plunges.
 - 4pc NO: Duration: 7 plunges.
-- Zhongli and C6 Faruzan: Full uptime.
+- Zhongli and C2/C6 Faruzan: Full uptime.
 
 ## Explaining Substat Rolls
 - Simulated manually via the 'damage' section on each subs page to find best DPR (damage per rotation). Balanced between Atk%, Crit Rate and Crit Damage, and capped at a maximum of 100% Crit Rate.
