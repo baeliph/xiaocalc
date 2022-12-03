@@ -57,9 +57,18 @@ class DesertPavilion(Artifact):
 
     def __init__(self, rotation: Rotation = EE12HP()):
         super().__init__(rotation)
-        self.base_stats.anemo_dmg += 0.30
+        self.base_stats.anemo_dmg += 0.15
     
     def dynamic_stats(self, num_hits=0):
         if isinstance(self.rotation, EE8N1CJP) and num_hits > 4:
             return Stats(bonus_dmg=0.40)
         return Stats()
+
+class DesertPavilionAtkGoblet(DesertPavilion):
+    """
+    4pc Desert Pavilion's Chronicle with ATK Goblet.
+    """
+
+    def __init__(self, rotation: Rotation = EE12HP()):
+        super().__init__(rotation)
+        self.base_stats = Stats(flat_hp=4780, flat_atk=311, atk=0.932, cdmg=0.622)

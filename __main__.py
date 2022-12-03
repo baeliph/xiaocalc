@@ -190,4 +190,7 @@ if __name__ == '__main__':
 
     extra_er_subs = False # Change to True if you want to give ER weapons +5 subs
 
-    main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)
+    for num_subs in [20, 25]:
+        for extra_er_subs in [False, True]:
+            for artifact_set in [DesertPavilion, DesertPavilionAtkGoblet]:
+                main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)
