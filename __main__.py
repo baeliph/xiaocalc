@@ -143,7 +143,7 @@ if __name__ == '__main__':
 
     num_subs = 20
 
-    rotation = EE12HP()
+    rotation = EE8N1CJP()
 
     artifact_set = Vermillion
 
