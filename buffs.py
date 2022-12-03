@@ -1,3 +1,4 @@
+from rotations import *
 from stats import Stats
 
 class Buff:
@@ -5,18 +6,20 @@ class Buff:
     Generic representation for a team buff for Xiao.
 
     Attributes:
-        duration: Number of plunges the buff lasts for. If 0, buff is always active.
+        duration: Number of hits the buff lasts for. If 0, buff is always active.
+        rotation: Rotation used for counting hits for buff uptime.
     """
 
-    def __init__(self, duration: int = 0):
-        self.duration = duration
+    def __init__(self, rotation: Rotation = EE12HP()):
+        self.duration = 0
+        self.rotation = rotation
 
     def __str__(self):
         return self.__class__.__name__
 
-    def buff(self, num_plunge=0, num_skill=0):
+    def buff(self, num_hits=0):
         """Returns the Buff's stats if active based on the current plunge or skill."""
-        if self.duration == 0 or num_plunge <= self.duration:
+        if self.duration == 0 or num_hits <= self.duration:
             return self.active()
         return Stats()
 
@@ -32,11 +35,12 @@ class Solo(Buff):
 class Bennett(Buff):
     """
     Bennett Burst buff. Gives 113% of his base ATK as flat ATK to Xiao.
-    Default duration: 7 plunges.
+    Default duration: 7 plunges for EE12HP.
     """
 
-    def __init__(self, duration: int = 7, base_atk: int = 865):
-        super().__init__(duration)
+    def __init__(self, rotation: Rotation = EE12HP(), base_atk: int = 865):
+        super().__init__(rotation)
+        self.duration = rotation.buff_duration_for_benny_ttds_4no()
         self.base_atk = base_atk
 
     def active(self):
@@ -47,11 +51,12 @@ class Bennett(Buff):
 class Noblesse(Buff):
     """
     4pc Noblesse Oblige buff. Gives 20% ATK.
-    Default duration: 7 plunges.
+    Default duration: 7 plunges for EE12HP.
     """
 
-    def __init__(self, duration: int = 7):
-        super().__init__(duration)
+    def __init__(self, rotation: Rotation = EE12HP()):
+        super().__init__(rotation)
+        self.duration = rotation.buff_duration_for_benny_ttds_4no()
 
     def active(self):
         return Stats(atk=0.20)
@@ -60,11 +65,12 @@ class Noblesse(Buff):
 class TTDS(Buff):
     """
     Thrilling Tales of Dragon Slayers. Gives 48% ATK.
-    Default duration: 7 plunges.
+    Default duration: 7 plunges for EE12HP.
     """
 
-    def __init__(self, duration: int = 7):
-        super().__init__(duration)
+    def __init__(self, rotation: Rotation = EE12HP()):
+        super().__init__(rotation)
+        self.duration = rotation.buff_duration_for_benny_ttds_4no()
 
     def active(self):
         return Stats(atk=0.48)
@@ -100,15 +106,13 @@ class FaruzanC2(Buff):
     Assumes Favonius Warbow for base ATK.
     """
 
-    def __init__(self, duration: int = 0, base_atk: int = 650):
-        super().__init__(duration)
+    def __init__(self, rotation: Rotation = EE12HP(), base_atk: int = 650):
+        super().__init__(rotation)
         self.base_atk = base_atk
 
-    def buff(self, num_plunge=0, num_skill=0):
-        if num_skill == 2:
-            # Faruzan's A4 flat dmg increase is on CD during Xiao's 2nd E.
-            return Stats(anemo_dmg=0.324, res_shred=0.30)
-        return Stats(anemo_dmg=0.324, res_shred=0.30, flat_dmg=0.32*self.base_atk)
+    def buff(self, num_hits=0):
+        flat_dmg = 0.32*self.base_atk if self.rotation.faruzan_a4_active(num_hits) else 0.0
+        return Stats(anemo_dmg=0.324, res_shred=0.30, flat_dmg=flat_dmg)
 
 
 class FaruzanC6(Buff):
@@ -117,12 +121,10 @@ class FaruzanC6(Buff):
     Assumes Elegy for base ATK.
     """
 
-    def __init__(self, duration: int = 0, base_atk: int = 804):
-        super().__init__(duration)
+    def __init__(self, rotation: Rotation = EE12HP(), base_atk: int = 804):
+        super().__init__(rotation)
         self.base_atk = base_atk
 
-    def buff(self, num_plunge=0, num_skill=0):
-        if num_skill == 2:
-            # Faruzan's A4 flat dmg increase is on CD during Xiao's 2nd E.
-            return Stats(cdmg=0.40, anemo_dmg=0.383, res_shred=0.30)
-        return Stats(cdmg=0.40, anemo_dmg=0.383, res_shred=0.30, flat_dmg=0.32*self.base_atk)
+    def buff(self, num_hits=0):
+        flat_dmg = 0.32*self.base_atk if self.rotation.faruzan_a4_active(num_hits) else 0.0
+        return Stats(cdmg=0.40, anemo_dmg=0.383, res_shred=0.30, flat_dmg=flat_dmg)

@@ -38,25 +38,17 @@ The numbers you see here assume perfect rolls for the individual weapons. A true
 - Artifact substats use max roll values ([see below for more info](#explaining-substat-rolls)).
 
 ### Rotation
-- 2 Elemental Skills and 12 High Plunges.
+Options:
+- 2 Elemental Skills and 12 High Plunges (EE12HP)
+- 2 Elemental Skills and 8 Rakes (EE8N1CJP)
 
-### Weapons
-- Calamity Queller has 2 stacks on 1st plunge, 3 stacks on 2nd plunge, 5 stacks on 3rd plunge, and max stacks for the rest.
-- Staff of the Scarlet Sands has 1 stack for the second Skill and 2 stacks for plunges 1-7.
-- 100% Passive Uptime taken for Shifting Windblade (On)
-
-### Buffs
-- Bennett: 865 Base T13. Duration: 7 plunges.
-- TTDS: Duration: 7 plunges.
-- 4pc NO: Duration: 7 plunges.
-- Zhongli and C2/C6 Faruzan: Full uptime.
+### Dynamic Buffs
+Dynamic buff mappings per rotation can be found here: [Xiao Weapon Calc Buff Uptime](https://docs.google.com/spreadsheets/d/1hR4dgRM6P5FHlMLTOh9D11Rcf6e6pj2gG5OM0XpOCrw/edit?usp=sharing).
 
 ## Explaining Substat Rolls
 - Simulated manually via the 'damage' section on each subs page to find best DPR (damage per rotation). Balanced between Atk%, Crit Rate and Crit Damage, and capped at a maximum of 100% Crit Rate.
 
 - Artifacts are based on 20/25 rolled stats, assuming best possible sub rolls per weapon.
-
-- Results in `charts/` and `substats/` are taken for 4pc Vermillion Hereafter.
 
 - Other stats (e.g. HP, DEF, EM, ER), unless otherwise specified, will be ignored.
   - There is an option `extra_er_subs` that you can set to `True` in order to give all ER weapons 5 extra subs.

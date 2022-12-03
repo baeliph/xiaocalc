@@ -1,35 +1,43 @@
 from artifacts import *
 from buffs import *
+from rotations import *
 from weapons import *
 from xiao import Xiao
 
 import csv
 from functools import partial
 import os
-import pandas as pd
 from tabulate import tabulate
 
-def rotation_dmg(weapon: Weapon, artifact: Artifact, buffs, verbose=False):
+def rotation_dmg(weapon: Weapon, artifact: Artifact, buffs, rotation: str, verbose=False):
     """
-    Calculates Xiao's total damage over a single EE Q 12HP rotation.
+    Calculates Xiao's total damage over the given rotation.
     """
-    xiao = Xiao(weapon, artifact, buffs)
+    xiao = Xiao(weapon, artifact, buffs, rotation)
 
-    # Rotation: EE Q 12HP
-    xiao.skill()
-    xiao.skill(1)
-    xiao.burst()
-    for i in range(1, 13):
-        xiao.high_plunge(i)
+    if isinstance(rotation, EE12HP):
+        xiao.skill()
+        xiao.skill()
+        xiao.burst()
+        for i in range(1, 13):
+            xiao.high_plunge()
+    elif isinstance(rotation, EE8N1CJP):
+        xiao.skill()
+        xiao.skill()
+        xiao.burst()
+        for i in range(1, 9):
+            xiao.n1()
+            xiao.ca()
+            xiao.high_plunge()
 
     if verbose:
         print('Weapon: {} R{}'.format(weapon, weapon.refine))
         print('Artifact: {}'.format(artifact.__class__.__name__))
-        print('Total DMG (EE Q 12HP): {}\n'.format(xiao.total_damage))
+        print('Total DMG ({}): {}\n'.format(str(rotation), xiao.total_damage))
 
     return xiao.total_damage
 
-def optimize(num_subs: int, artifact_set, weapon: Weapon, buffs, verbose=False):
+def optimize(num_subs: int, artifact_set, weapon: Weapon, buffs, rotation: str, verbose=False):
     """
     Optimize rotation damage across all substat combinations for given
     artifact set, weapon, and buffs.
@@ -43,10 +51,10 @@ def optimize(num_subs: int, artifact_set, weapon: Weapon, buffs, verbose=False):
         for cdmg in range(0, num_subs - crate + 1):
             atk = num_subs - crate - cdmg
 
-            artifact = artifact_set()
+            artifact = artifact_set(rotation=rotation)
             artifact.base_stats.add_artifact_subs(atk=atk, crate=crate, cdmg=cdmg)
 
-            dmg = rotation_dmg(weapon, artifact, buffs)
+            dmg = rotation_dmg(weapon, artifact, buffs, rotation)
             if verbose:
                 print('atk: {}, crate: {}, cdmg: {}, dmg: {}'.format(atk, crate, cdmg, dmg))
             if dmg > max_dmg:
@@ -64,30 +72,34 @@ def write_csv(directory, filename, data):
         writer = csv.writer(outfile)
         writer.writerows(data)
 
-def main(num_subs, artifact_set, buff_combos, weapons, extra_er_subs=False):
+def main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs=False):
     """
     Generate charts for the given parameters.
     """
-    for buffs in buff_combos:
+    for buff_types in buff_combos:
+        # Convert buff_types into buff instances.
+        buffs = [buff_type(rotation=rotation) for buff_type in buff_types]
+
         # Output.
         weapon_chart = [["Weapon", "R1", "R2", "R3", "R4", "R5"]]
         optimal_substats = [['weapon', 'refine', 'atk', 'crate', 'cdmg']]
         
         for weapon in weapons:
-            weapon_name = str(weapon(1))
+            weapon_name = str(weapon(refine=1))
             row = [weapon_name]
             for refine in range(1, 6):
                 # Give ER weapons 5 extra subs.
                 bonus_subs = 0
-                if extra_er_subs and weapon(refine).base_stats.er > 0:
+                if extra_er_subs and weapon(refine=refine, rotation=rotation).base_stats.er > 0:
                     bonus_subs = 5
 
                 # Get optimal substat distribution and max damage.
                 atk, crate, cdmg, dmg = optimize(
                     num_subs + bonus_subs,
                     artifact_set,
-                    weapon(refine),
-                    buffs
+                    weapon(refine, rotation=rotation),
+                    buffs,
+                    rotation
                 )
 
                 # Save results.
@@ -95,71 +107,86 @@ def main(num_subs, artifact_set, buff_combos, weapons, extra_er_subs=False):
                 row.append(dmg)
             weapon_chart.append(row)
     
+        # weapon_chart[1:] = sorted(weapon_chart[1:], key=lambda row: row[1], reverse=True)
+        
         # Print weapon chart to stdout.
-        weapon_chart[1:] = sorted(weapon_chart[1:], key=lambda row: row[1], reverse=True)
-        print('\nBuffs: [{}]'.format(", ".join(map(str, buffs))))
+        artifact_name = str(artifact_set(rotation))
+        print('\nNum Subs: {}'.format(num_subs))
+        print('Rotation: {}'.format(str(rotation)))
+        print('Artifact: {}'.format(artifact_name))
+        print('With ER: {}'.format(extra_er_subs))
+        print('Buffs: [{}]'.format(", ".join(map(str, buffs))))
         print(tabulate(weapon_chart, headers='firstrow'))
 
-        # Save weapon chart and substat distributions to CSVs.
-        er_name = "with_er" if extra_er_subs else "without_er"
-        filename = '{}subs/{}/{}.csv'.format(num_subs, er_name, "-".join(map(str, buffs)))
+        # Save weapon chart to CSV.
+        filename = 'num_subs={}/rotation={}/artifact={}/with_er={}/{}.csv'.format(
+            num_subs, str(rotation), artifact_name, extra_er_subs, "-".join(map(str, buffs))
+        )
         write_csv('charts', filename, weapon_chart)
+        
+        # Save substat distribution to CSV.
+        filename = 'num_subs={}/artifact={}/with_er={}/{}.csv'.format(
+            num_subs, artifact_name, extra_er_subs, "-".join(map(str, buffs))
+        )
         write_csv('substats', filename, optimal_substats)
 
 if __name__ == '__main__':
     """
     Configure your comparison parameters here.
         num_subs: Number of artifact substats.
+        rotation: Rotation.
         artifact_set: Artifact set.
         buff_combos: Buff combinations. Each combo corresponds to one output chart.
         weapons: List of weapons to compare for each chart.
         extra_er_subs: Set to True if you want ER weapons to get 5 extra subs.
     """
 
-    num_subs = 25
+    num_subs = 20
 
-    artifact_set = Vermillion
+    rotation = EE12HP()
+
+    artifact_set = DesertPavilion
 
     buff_combos = [
-        [Solo()],
-        [TTDS()],
-        [Bennett(), Noblesse()],
-        [TTDS(), Bennett(), Noblesse()],
-        [FaruzanC6()]
+        [Solo],
+        [TTDS],
+        [Bennett, Noblesse],
+        [TTDS, Bennett, Noblesse],
+        [FaruzanC6]
     ]
 
     weapons = [
-        partial(PJWS),
         partial(PJWS, stacked=True),
-        partial(Homa),
+        partial(PJWS),
         partial(Homa, below50=True),
-        partial(Vortex, shielded=False, stacked=False),
-        partial(Vortex, shielded=False, stacked=True),
-        partial(Vortex, shielded=True, stacked=False),
+        partial(Homa),
         partial(Vortex, shielded=True, stacked=True),
-        partial(CalamityQueller, stacked=False),
+        partial(Vortex, shielded=True, stacked=False),
         partial(CalamityQueller, stacked=True),
-        partial(EngulfingLightning),
+        partial(CalamityQueller, stacked=False),
+        partial(Vortex, shielded=False, stacked=True),
+        partial(Vortex, shielded=False, stacked=False),
         partial(StaffOfTheScarletSands),
         partial(SkywardSpine),
-        partial(Lithic, stacks=1),
-        partial(Lithic, stacks=2),
-        partial(Lithic, stacks=3),
+        partial(EngulfingLightning),
         partial(Lithic, stacks=4),
+        partial(Lithic, stacks=3),
+        partial(Lithic, stacks=2),
+        partial(Lithic, stacks=1),
         partial(Deathmatch, num_opponents=1),
         partial(Deathmatch, num_opponents=2),
-        partial(Blackcliff, stacks=0),
-        partial(Blackcliff, stacks=1),
-        partial(Blackcliff, stacks=2),
         partial(Blackcliff, stacks=3),
-        partial(MissiveWindspear, passive_active=False),
+        partial(Blackcliff, stacks=2),
+        partial(Blackcliff, stacks=1),
+        partial(Blackcliff, stacks=0),
         partial(MissiveWindspear, passive_active=True),
-        partial(FavoniusLance),
+        partial(MissiveWindspear, passive_active=False),
         partial(WavebreakersFin),
+        partial(FavoniusLance),
         partial(PrototypeStarglitter),
         partial(WhiteTassel)
     ]
 
     extra_er_subs = False # Change to True if you want to give ER weapons +5 subs
 
-    main(num_subs, artifact_set, buff_combos, weapons, extra_er_subs)
+    main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)

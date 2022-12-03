@@ -1,3 +1,4 @@
+from rotations import *
 from stats import Stats
 
 class Weapon:
@@ -6,11 +7,13 @@ class Weapon:
 
     Attributes:
         refine: Weapon refinement. Must be between [1, 5].
+        rotation: Xiao rotation combo. Default: EE12HP
     """
 
-    def __init__(self, refine: int = 1):
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
         self.base_stats = Stats()
         self.refine = refine
+        self.rotation = rotation
 
     def __str__(self):
         return self.__class__.__name__
@@ -32,13 +35,12 @@ class PJWS(Weapon):
     """
     Primordial Jade Winged-Spear.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         stacked: True if weapon is prestacked.
     """
 
-    def __init__(self, refine: int = 1, stacked: bool = False):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), stacked: bool = False):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=674, crate=0.221)
         self.stacked = stacked
 
@@ -62,13 +64,12 @@ class Homa(Weapon):
     """
     Staff of Homa.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         below50: True if character HP is below 50%.
     """
 
-    def __init__(self, refine: int = 1, below50: bool = False):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), below50: bool = False):
+        super().__init__(refine, rotation)
         hp_increase = self._stat(0.20, 0.05)
         self.base_stats = Stats(base_atk=608, hp=hp_increase, cdmg=0.662)
         self.below50 = below50
@@ -88,14 +89,13 @@ class Vortex(Weapon):
     """
     Vortex Vanquisher.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         shielded: True if character is shielded.
         stacked: True if weapon is prestacked.
     """
 
-    def __init__(self, refine: int = 1, shielded: bool = False, stacked: bool = False):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), shielded: bool = False, stacked: bool = False):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=608, atk=0.496)
         self.shielded = shielded
         self.stacked = stacked
@@ -114,13 +114,12 @@ class CalamityQueller(Weapon):
     """
     Calamity Queller.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         stacked: True if weapon is prestacked.
     """
 
-    def __init__(self, refine: int = 1, stacked: bool = False):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), stacked: bool = False):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=741, atk=0.165, bonus_dmg=self._stat(0.12, 0.03))
         self.stacked = stacked
     
@@ -129,53 +128,32 @@ class CalamityQueller(Weapon):
         return '{} ({})'.format(super().__str__(), stacked)
 
     def dynamic_stats(self, num_hits, stats: Stats):
-        atk_increase = self._stat(0.032, 0.008)
-        if self.stacked:
-            return Stats(atk=6*atk_increase)
-
-        # Calamity stack mapping based on hits so far.
-        if num_hits == 2 or num_hits == 3:
-            # 1st plunge = 2 stacks
-            # 2nd plunge = 3 stacks
-            return Stats(atk=num_hits*atk_increase)
-        elif num_hits == 4:
-            # 3rd plunge = 5 stacks
-            return Stats(atk=5*atk_increase)
-        elif num_hits > 4:
-            # 4th plunge and onwards = 6 stacks   
-            return Stats(atk=6*atk_increase) 
-        else:
-            return Stats()
+        atk_increase = self._stat(0.032, 0.008) 
+        stacks = 6 if self.stacked else self.rotation.calamity_stacks(num_hits)
+        return Stats(atk=stacks*atk_increase)
 
 class SkywardSpine(Weapon):
     """
     Skyward Spine.
-
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
     """
 
-    def __init__(self, refine: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=674, crate=self._stat(0.08, 0.02), er=0.368)
 
 
 class EngulfingLightning(Weapon):
     """
     Engulfing Lightning.
-
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
     """
 
-    def __init__(self, refine: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=608, er=0.551)
     
     def dynamic_stats(self, num_hits, stats: Stats):
         active_er = stats.er
-        if num_hits > 1 and num_hits < 11:
-            # Extra ER for 12s after Burst.
+        if self.rotation.engulfing_active(num_hits):
             active_er += self._stat(0.30, 0.05)
         atk_increase = self._stat(0.28, 0.07) * active_er
         return Stats(atk=atk_increase)
@@ -184,36 +162,26 @@ class EngulfingLightning(Weapon):
 class StaffOfTheScarletSands(Weapon):
     """
     Staff of the Scarlet Sands.
-
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
     """
 
-    def __init__(self, refine: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=542, crate=0.441)
     
     def dynamic_stats(self, num_hits, stats: Stats):
-        atk_increase = self._stat(0.52, 0.13)
-        if num_hits == 1:
-            # Second E has 1 stack.
-            atk_increase += self._stat(0.28, 0.07)
-        elif num_hits > 1 and num_hits < 9:
-            # Plunges 1-7 have 2 stacks.
-            atk_increase += self._stat(0.28, 0.07)*2
+        atk_increase = self._stat(0.52, 0.13) + self._stat(0.28, 0.07) * self.rotation.soss_stacks(num_hits)
         return Stats(flat_atk=atk_increase * stats.em)
 
 class Lithic(Weapon):
     """
     Lithic Spear.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         stacks: Number of stacks to assume. Must be between [1, 4].
     """
 
-    def __init__(self, refine: int = 1, stacks: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), stacks: int = 1):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=565, atk=0.276)
         self.stacks = stacks
     
@@ -230,13 +198,12 @@ class Deathmatch(Weapon):
     """
     The Deathmatch.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         num_opponents: Number of opponents near character.
     """
     
-    def __init__(self, refine: int = 1, num_opponents: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), num_opponents: int = 1):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=454, crate=0.368)
         self.num_opponents = num_opponents
     
@@ -253,13 +220,12 @@ class Blackcliff(Weapon):
     """
     Blackcliff Pole.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         stacks: Number of stacks to assume. Must be between [0, 3].
     """
 
-    def __init__(self, refine: int = 1, stacks: int = 0):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), stacks: int = 0):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=510, cdmg=0.551)
         self.stacks = stacks
     
@@ -275,13 +241,12 @@ class MissiveWindspear(Weapon):
     """
     Missive Windspear.
 
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
+    Additional Attributes:
         passive_active: True if passive is active.
     """
 
-    def __init__(self, refine: int = 1, passive_active: bool = False):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP(), passive_active: bool = False):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=510, atk=0.4135)
         self.passive_active = passive_active
     
@@ -297,50 +262,38 @@ class MissiveWindspear(Weapon):
 class WavebreakersFin(Weapon):
     """
     Wavebreaker's Fin.
-
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
     """
 
-    def __init__(self, refine: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=620, atk=0.138)
 
 
 class FavoniusLance(Weapon):
     """
     Favonius Lance.
-
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
     """
 
-    def __init__(self, refine: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=565, er=0.306)
 
 
 class PrototypeStarglitter(Weapon):
     """
     Prototype Starglitter.
-
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
     """
 
-    def __init__(self, refine: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=510, er=0.459)
 
 
 class WhiteTassel(Weapon):
     """
     White Tassel.
-
-    Attributes:
-        refine: Weapon refinement. Must be between [1, 5].
     """
 
-    def __init__(self, refine: int = 1):
-        super().__init__(refine)
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=401, crate=0.234)
