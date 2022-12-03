@@ -145,14 +145,15 @@ if __name__ == '__main__':
 
     rotation = EE12HP()
 
-    artifact_set = DesertPavilion
+    artifact_set = Vermillion
 
     buff_combos = [
         [Solo],
         [TTDS],
         [Bennett, Noblesse],
         [TTDS, Bennett, Noblesse],
-        [FaruzanC6]
+        [FaruzanC6],
+        [Bennett, Noblesse, FaruzanC6]
     ]
 
     weapons = [
