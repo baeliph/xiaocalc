@@ -122,13 +122,13 @@ def main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs=F
         filename = 'num_subs={}/rotation={}/artifact={}/with_er={}/{}.csv'.format(
             num_subs, str(rotation), artifact_name, extra_er_subs, "-".join(map(str, buffs))
         )
-        write_csv('charts', filename, weapon_chart)
+        # write_csv('charts', filename, weapon_chart)
         
         # Save substat distribution to CSV.
         filename = 'num_subs={}/artifact={}/with_er={}/{}.csv'.format(
             num_subs, artifact_name, extra_er_subs, "-".join(map(str, buffs))
         )
-        write_csv('substats', filename, optimal_substats)
+        # write_csv('substats', filename, optimal_substats)
 
 if __name__ == '__main__':
     """
@@ -143,17 +143,19 @@ if __name__ == '__main__':
 
     num_subs = 20
 
-    rotation = EE8N1CJP()
+    rotation = EE12HP()
 
     artifact_set = Vermillion
 
     buff_combos = [
-        [Solo],
-        [TTDS],
-        [Bennett, Noblesse],
-        [TTDS, Bennett, Noblesse],
-        [FaruzanC6],
-        [Bennett, Noblesse, FaruzanC6]
+        [FaruzanC2, TTDS, Zhongli],
+        [TTDS, Bennett, Noblesse, Zhongli]
+        # [Solo],
+        # [TTDS],
+        # [Bennett, Noblesse],
+        # [TTDS, Bennett, Noblesse],
+        # [FaruzanC6],
+        # [Bennett, Noblesse, FaruzanC6]
     ]
 
     weapons = [
@@ -190,7 +192,4 @@ if __name__ == '__main__':
 
     extra_er_subs = False # Change to True if you want to give ER weapons +5 subs
 
-    for num_subs in [20, 25]:
-        for extra_er_subs in [False, True]:
-            for artifact_set in [DesertPavilion, DesertPavilionAtkGoblet]:
-                main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)
+    main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)

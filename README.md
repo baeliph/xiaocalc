@@ -23,7 +23,7 @@
 ## How to Use
 Install required packages: `pip3 install -r requirements.txt`.
 
-To run the file, you can run either `python3 .` or `python3 __main__.py` from within the repo.
+To run the file, you can run either `python3 main.py` from within the repo.
 
 Weapon charts will be printed to your terminal, and weapon charts and substat distribution CSVs will be saved in `charts/` and `substats/`.
 
