@@ -31,6 +31,12 @@ class Rotation:
         """
         pass
 
+    def hunter_stacks(self, num_hits):
+        """
+        Returns the number of Hunter stacks to account for.
+        """
+        pass
+
     def calamity_stacks(self, num_hits):
         """
         Returns the number of Calamity Queller stacks to account for.
@@ -77,6 +83,10 @@ class EE12HP(Rotation):
     def vermillion_stacks(self, num_hits):
         num_plunge = num_hits - 1
         return min(num_plunge, 4)
+    
+    def hunter_stacks(self, num_hits):
+        num_plunge = num_hits - 1
+        return min(num_plunge, 3)
     
     def calamity_stacks(self, num_hits):
         if num_hits < 2:
@@ -138,6 +148,16 @@ class EE8N1CJP(Rotation):
             return 3
         else:
             return 4
+        
+    def hunter_stacks(self, num_hits):
+        if num_hits < 5:
+            return 0
+        elif num_hits == 5:
+            return 1
+        elif num_hits <= 8:
+            return 2
+        else:
+            return 3
     
     def calamity_stacks(self, num_hits):
         if num_hits < 2:

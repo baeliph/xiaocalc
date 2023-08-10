@@ -1,6 +1,8 @@
+from rotations import EE12HP, Rotation
 from stats import Stats
 from rotations import *
 from weapons import *
+from weapons import EE12HP, Rotation
 
 class Artifact:
     """
@@ -50,6 +52,15 @@ class AtkAnemo(Artifact):
         self.base_stats.atk += 0.18
         self.base_stats.anemo_dmg += 0.15
 
+class AnemoAnemo(Artifact):
+    """
+    2pc +15% Anemo DMG, 2pc +15% Anemo DMG.
+    """
+
+    def __init__(self, rotation: Rotation = EE12HP()):
+        super().__init__(rotation)
+        self.base_stats.anemo_dmg += 0.30
+
 class DesertPavilion(Artifact):
     """
     4pc Desert Pavilion's Chronicle.
@@ -72,3 +83,15 @@ class DesertPavilionAtkGoblet(DesertPavilion):
     def __init__(self, rotation: Rotation = EE12HP()):
         super().__init__(rotation)
         self.base_stats = Stats(flat_hp=4780, flat_atk=311, atk=0.932, cdmg=0.622)
+
+class Hunter(Artifact):
+    """
+    4pc Marechaussee Hunter
+    """
+
+    def __init__(self, rotation: Rotation = EE12HP()):
+        super().__init__(rotation)
+
+    def dynamic_stats(self, num_hits=0):
+        num_stacks = self.rotation.hunter_stacks(num_hits)
+        return Stats(crate=0.12*num_stacks)

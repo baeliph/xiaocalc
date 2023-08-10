@@ -1,0 +1,146 @@
+weapon,refine,atk,crate,cdmg
+PJWS (Stacked),R1,0,2,23
+PJWS (Stacked),R2,0,2,23
+PJWS (Stacked),R3,0,2,23
+PJWS (Stacked),R4,0,2,23
+PJWS (Stacked),R5,0,2,23
+PJWS,R1,0,2,23
+PJWS,R2,0,2,23
+PJWS,R3,0,2,23
+PJWS,R4,0,2,23
+PJWS,R5,0,2,23
+Homa (50%),R1,0,7,18
+Homa (50%),R2,0,7,18
+Homa (50%),R3,0,7,18
+Homa (50%),R4,0,7,18
+Homa (50%),R5,0,7,18
+Homa,R1,1,7,17
+Homa,R2,1,7,17
+Homa,R3,1,7,17
+Homa,R4,0,7,18
+Homa,R5,0,7,18
+"Vortex (Shielded, Stacked)",R1,0,7,18
+"Vortex (Shielded, Stacked)",R2,0,7,18
+"Vortex (Shielded, Stacked)",R3,0,7,18
+"Vortex (Shielded, Stacked)",R4,0,7,18
+"Vortex (Shielded, Stacked)",R5,0,7,18
+"Vortex (Shielded, Unstacked)",R1,0,7,18
+"Vortex (Shielded, Unstacked)",R2,0,7,18
+"Vortex (Shielded, Unstacked)",R3,0,7,18
+"Vortex (Shielded, Unstacked)",R4,0,7,18
+"Vortex (Shielded, Unstacked)",R5,0,7,18
+CalamityQueller (Stacked),R1,0,7,18
+CalamityQueller (Stacked),R2,0,7,18
+CalamityQueller (Stacked),R3,0,7,18
+CalamityQueller (Stacked),R4,0,7,18
+CalamityQueller (Stacked),R5,0,7,18
+CalamityQueller (Unstacked),R1,0,7,18
+CalamityQueller (Unstacked),R2,0,7,18
+CalamityQueller (Unstacked),R3,0,7,18
+CalamityQueller (Unstacked),R4,0,7,18
+CalamityQueller (Unstacked),R5,0,7,18
+"Vortex (Unshielded, Stacked)",R1,0,7,18
+"Vortex (Unshielded, Stacked)",R2,0,7,18
+"Vortex (Unshielded, Stacked)",R3,0,7,18
+"Vortex (Unshielded, Stacked)",R4,0,7,18
+"Vortex (Unshielded, Stacked)",R5,0,7,18
+"Vortex (Unshielded, Unstacked)",R1,0,7,18
+"Vortex (Unshielded, Unstacked)",R2,0,7,18
+"Vortex (Unshielded, Unstacked)",R3,0,7,18
+"Vortex (Unshielded, Unstacked)",R4,0,7,18
+"Vortex (Unshielded, Unstacked)",R5,0,7,18
+StaffOfTheScarletSands,R1,1,0,24
+StaffOfTheScarletSands,R2,1,0,24
+StaffOfTheScarletSands,R3,1,0,24
+StaffOfTheScarletSands,R4,1,0,24
+StaffOfTheScarletSands,R5,1,0,24
+SkywardSpine,R1,3,5,22
+SkywardSpine,R2,3,5,22
+SkywardSpine,R3,3,4,23
+SkywardSpine,R4,3,4,23
+SkywardSpine,R5,4,3,23
+EngulfingLightning,R1,0,7,23
+EngulfingLightning,R2,0,7,23
+EngulfingLightning,R3,0,7,23
+EngulfingLightning,R4,0,7,23
+EngulfingLightning,R5,0,7,23
+Lithic (4 Stacks),R1,0,4,21
+Lithic (4 Stacks),R2,0,3,22
+Lithic (4 Stacks),R3,0,2,23
+Lithic (4 Stacks),R4,0,1,24
+Lithic (4 Stacks),R5,0,0,25
+Lithic (3 Stacks),R1,0,5,20
+Lithic (3 Stacks),R2,0,4,21
+Lithic (3 Stacks),R3,0,3,22
+Lithic (3 Stacks),R4,0,3,22
+Lithic (3 Stacks),R5,0,2,23
+Lithic (2 Stacks),R1,0,6,19
+Lithic (2 Stacks),R2,0,5,20
+Lithic (2 Stacks),R3,0,5,20
+Lithic (2 Stacks),R4,0,4,21
+Lithic (2 Stacks),R5,0,4,21
+Lithic (1 Stacks),R1,0,6,19
+Lithic (1 Stacks),R2,0,6,19
+Lithic (1 Stacks),R3,0,6,19
+Lithic (1 Stacks),R4,0,6,19
+Lithic (1 Stacks),R5,0,5,20
+Deathmatch (1 Opponent),R1,0,0,25
+Deathmatch (1 Opponent),R2,0,0,25
+Deathmatch (1 Opponent),R3,0,0,25
+Deathmatch (1 Opponent),R4,0,0,25
+Deathmatch (1 Opponent),R5,0,0,25
+Deathmatch (2+ Opponents),R1,0,0,25
+Deathmatch (2+ Opponents),R2,0,0,25
+Deathmatch (2+ Opponents),R3,0,0,25
+Deathmatch (2+ Opponents),R4,0,0,25
+Deathmatch (2+ Opponents),R5,0,0,25
+Blackcliff (3 Stacks),R1,0,7,18
+Blackcliff (3 Stacks),R2,0,7,18
+Blackcliff (3 Stacks),R3,0,7,18
+Blackcliff (3 Stacks),R4,0,7,18
+Blackcliff (3 Stacks),R5,0,7,18
+Blackcliff (2 Stacks),R1,0,7,18
+Blackcliff (2 Stacks),R2,0,7,18
+Blackcliff (2 Stacks),R3,0,7,18
+Blackcliff (2 Stacks),R4,0,7,18
+Blackcliff (2 Stacks),R5,0,7,18
+Blackcliff (1 Stacks),R1,0,7,18
+Blackcliff (1 Stacks),R2,0,7,18
+Blackcliff (1 Stacks),R3,0,7,18
+Blackcliff (1 Stacks),R4,0,7,18
+Blackcliff (1 Stacks),R5,0,7,18
+Blackcliff (0 Stacks),R1,1,7,17
+Blackcliff (0 Stacks),R2,1,7,17
+Blackcliff (0 Stacks),R3,1,7,17
+Blackcliff (0 Stacks),R4,1,7,17
+Blackcliff (0 Stacks),R5,1,7,17
+MissiveWindspear (On),R1,0,7,18
+MissiveWindspear (On),R2,0,7,18
+MissiveWindspear (On),R3,0,7,18
+MissiveWindspear (On),R4,0,7,18
+MissiveWindspear (On),R5,0,7,18
+MissiveWindspear (Off),R1,0,7,18
+MissiveWindspear (Off),R2,0,7,18
+MissiveWindspear (Off),R3,0,7,18
+MissiveWindspear (Off),R4,0,7,18
+MissiveWindspear (Off),R5,0,7,18
+WavebreakersFin,R1,0,7,18
+WavebreakersFin,R2,0,7,18
+WavebreakersFin,R3,0,7,18
+WavebreakersFin,R4,0,7,18
+WavebreakersFin,R5,0,7,18
+FavoniusLance,R1,1,7,22
+FavoniusLance,R2,1,7,22
+FavoniusLance,R3,1,7,22
+FavoniusLance,R4,1,7,22
+FavoniusLance,R5,1,7,22
+PrototypeStarglitter,R1,0,7,23
+PrototypeStarglitter,R2,0,7,23
+PrototypeStarglitter,R3,0,7,23
+PrototypeStarglitter,R4,0,7,23
+PrototypeStarglitter,R5,0,7,23
+WhiteTassel,R1,0,1,24
+WhiteTassel,R2,0,1,24
+WhiteTassel,R3,0,1,24
+WhiteTassel,R4,0,1,24
+WhiteTassel,R5,0,1,24
