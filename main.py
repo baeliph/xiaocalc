@@ -141,11 +141,11 @@ if __name__ == '__main__':
         extra_er_subs: Set to True if you want ER weapons to get 5 extra subs.
     """
 
-    num_subs = 20
+    num_subs = 25
 
     rotation = EE12HP()
 
-    artifact_set = Hunter
+    artifact_set = AtkAtk
 
     buff_combos = [
         [Solo],
@@ -189,6 +189,6 @@ if __name__ == '__main__':
         partial(WhiteTassel)
     ]
 
-    extra_er_subs = True # Change to True if you want to give ER weapons +5 subs
+    extra_er_subs = False # Change to True if you want to give ER weapons +5 subs
 
     main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)
