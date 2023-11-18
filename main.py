@@ -145,16 +145,18 @@ if __name__ == '__main__':
 
     rotation = EE12HP()
 
-    artifact_set = AtkAtk
+    artifact_set = VermillionAtkGoblet
 
     buff_combos = [
-        [Solo],
-        [TTDS],
-        [Bennett, Noblesse],
-        [TTDS, Bennett, Noblesse],
-        [FaruzanC2],
-        [FaruzanC6],
-        [Bennett, Noblesse, FaruzanC6]
+        # [Solo],
+        # [TTDS],
+        # [Bennett, Noblesse],
+        # [TTDS, Bennett, Noblesse],
+        # [FaruzanC2],
+        # [FaruzanC6],
+        # [Bennett, Noblesse, FaruzanC6],
+        [FurinaC0, FaruzanC6, Noblesse],
+        [FurinaC050HP, FaruzanC6, Noblesse]
     ]
 
     weapons = [

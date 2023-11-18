@@ -128,3 +128,11 @@ class FaruzanC6(Buff):
     def buff(self, num_hits=0):
         flat_dmg = 0.32*self.base_atk if self.rotation.faruzan_a4_active(num_hits) else 0.0
         return Stats(cdmg=0.40, anemo_dmg=0.383, res_shred=0.30, flat_dmg=flat_dmg)
+
+class FurinaC0(Buff):
+    def buff(self, num_hits=0):
+        return Stats(bonus_dmg=0.25 * (self.rotation.fanfare(num_hits) * 0.01))
+
+class FurinaC050HP(Buff):
+    def buff(self, num_hits=0):
+        return Stats(bonus_dmg=0.25 * (self.rotation.fanfare_50(num_hits) * 0.01))

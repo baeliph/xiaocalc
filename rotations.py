@@ -55,6 +55,12 @@ class Rotation:
         """
         pass
 
+    def fanfare(self, num_hits):
+        pass
+
+    def fanfare_50(self, num_hits):
+        pass   
+
 class EE12HP(Rotation):
     """
     EE Q 12HP.
@@ -107,6 +113,24 @@ class EE12HP(Rotation):
         elif num_hits > 1 and num_hits < 9:
             return 2
         return 0
+
+    def fanfare(self, num_hits):
+        num_plunge = num_hits - 1
+        return 36 + 20 * (num_plunge - 1)
+
+    def fanfare_50(self, num_hits):
+        if num_hits < 2:
+            return 190
+        num_plunge = num_hits - 1
+        if num_plunge == 1:
+            return 230
+        elif num_plunge == 2:
+            return 245
+        elif num_plunge == 3:
+            return 280
+        else:
+            return 300
+
 
 class EE8N1CJP(Rotation):
     """

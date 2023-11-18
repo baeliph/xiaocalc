@@ -33,6 +33,12 @@ class Vermillion(Artifact):
         num_stacks = self.rotation.vermillion_stacks(num_hits)
         return Stats(atk=0.08 + 0.1*num_stacks)
 
+class VermillionAtkGoblet(Vermillion):
+    def __init__(self, rotation: Rotation = EE12HP()):
+        self.base_stats = Stats(flat_hp=4780, flat_atk=311, atk=0.466*2, cdmg=0.622)
+        self.rotation = rotation
+        self.base_stats.atk += 0.18
+
 class AtkAtk(Artifact):
     """
     2pc +18% ATK, 2pc +18% ATK.
