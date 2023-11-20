@@ -243,7 +243,7 @@ class JeanC0(XiaoFaruzanFurinaRotation):
         self.jean = Character("Jean", 21441.0, current_hp)
         self.characters = [self.xiao, self.faruzan, self.furina, self.jean]
 
-    def JeanBurst(self, heal_amount=13330.0):
+    def JeanBurst(self, heal_amount=14052.0):
         """
         Jean's Burst on-cast heal.
         """
@@ -251,7 +251,7 @@ class JeanC0(XiaoFaruzanFurinaRotation):
             self.fanfare += character.heal(heal_amount)
         return "Jean Burst", self.fanfare
     
-    def JeanBurstTick(self, heal_amount=1333.0):
+    def JeanBurstTick(self, heal_amount=1405.0):
         """
         Jean's Burst heal ticks.
         """
@@ -275,11 +275,11 @@ class JeanC4(JeanC0):
     """
     def JeanBurst(self):
         for character in self.characters:
-            self.fanfare += character.heal(15996.0)
+            self.fanfare += character.heal(16847.0)
         return "Jean Burst", self.fanfare
 
     def JeanBurstTick(self):
-        self.fanfare += self.xiao.heal(1600.0)
+        self.fanfare += self.xiao.heal(1685.0)
         self.FurinaA1(self.xiao)
         return "Jean Tick", self.fanfare
 
@@ -321,7 +321,7 @@ class Bennett(XiaoFaruzanFurinaRotation):
             self.add(0.9 + 1.0 * i, self.BennettBurstTick)
 
 def main():
-    rotation = Bennett(1.0)
+    rotation = JeanC0(1.0)
     rotation.run()
 
 if __name__ == '__main__':
