@@ -90,7 +90,7 @@ class XiaoFaruzanFurinaRotation:
         self.furina_octopus = 0
         self.furina_crab = 0
 
-    def FurinaSeaHorse(self):
+    def FurinaSeaHorse(self, time):
         """
         Furina's Seahorse hits.
         """
@@ -102,7 +102,7 @@ class XiaoFaruzanFurinaRotation:
                 drain += 1
         return "Furina Seahorse {} ({} drained)".format(self.furina_seahorse, drain), self.fanfare
     
-    def FurinaOctopus(self):
+    def FurinaOctopus(self, time):
         """
         Furina's Octopus hits.
         """
@@ -114,7 +114,7 @@ class XiaoFaruzanFurinaRotation:
                 drain += 1
         return "Furina Octopus {} ({} drained)".format(self.furina_octopus, drain), self.fanfare
     
-    def FurinaCrab(self):
+    def FurinaCrab(self, time):
         """
         Furina's Crab hits.
         """
@@ -126,27 +126,27 @@ class XiaoFaruzanFurinaRotation:
                 drain += 1
         return "Furina Crab {} ({} drained)".format(self.furina_crab, drain), self.fanfare
     
-    def XiaoBurst(self):
+    def XiaoBurst(self, time):
         """
         Xiao's Burst HP drain.
         """
         self.fanfare += self.xiao.drain_curr(0.025)
         return "Xiao HP Drain", self.fanfare
 
-    def XiaoE(self):
+    def XiaoE(self, time):
         """
         Xiao's Elemental Skill.
         """
         return "Xiao E", self.fanfare
 
-    def XiaoPlunge(self):
+    def XiaoPlunge(self, time):
         """
         Xiao's High Plunge in Burst.
         """
         self.plunge += 1
         return "Xiao Plunge {}".format(self.plunge), self.fanfare
     
-    def FaruzanSkill(self):
+    def FaruzanSkill(self, time):
         """
         C6 Faruzan's Elemental Skill.
         """
@@ -169,37 +169,37 @@ class XiaoFaruzanFurinaRotation:
         """
         insort(self.timeline, (time, action), key=lambda x: x[0])
     
-    def generate_timeline(self):
+    def generate_timeline(self, xiao_start=7.65):
         """
         Generate the rotation's timeline.
         """
         # Xiao Skills
-        self.add(0.500, self.XiaoE)
-        self.add(1.000, self.XiaoE)
+        self.add(xiao_start, self.XiaoE)
+        self.add(xiao_start + 0.5, self.XiaoE)
 
         # Xiao Plunges, once every 1.167 second
         for i in range(12):
-            self.add(3.283 + 1.167 * i, self.XiaoPlunge)
+            self.add(xiao_start + 2.78 + 1.167 * i, self.XiaoPlunge)
 
         # Xiao HP Drain, once a second
         for i in range(16):
-            self.add(2.117 + 1.0 * i, self.XiaoBurst)
+            self.add(xiao_start + 1.617 + 1.0 * i, self.XiaoBurst)
 
         # Furina Seahorse
         for i in range(13):
-            self.add(1.190 * (i + 1), self.FurinaSeaHorse)
+            self.add(2.217 + 1.190 * (i + 1), self.FurinaSeaHorse)
 
         # Furina Octopus
         for i in range(7):
-            self.add(2.900 * (i + 1), self.FurinaOctopus)
+            self.add(2.217 + 2.900 * (i + 1), self.FurinaOctopus)
         
         # Furina Crab
         for i in range(4):
-            self.add(4.800 * (i + 1), self.FurinaCrab)
+            self.add(2.217 + 4.800 * (i + 1), self.FurinaCrab)
         
         # Faruzan Skill
         for i in range(7):
-            self.add(3.0 * i, self.FaruzanSkill)
+            self.add(1.0 + 3.0 * i, self.FaruzanSkill)
 
     def should_print(self, action_name: str):
         """
@@ -210,7 +210,8 @@ class XiaoFaruzanFurinaRotation:
             'Xiao Plunge',
             'Jean Burst',
             'Furina',
-            'Faruzan Skill'
+            'Faruzan',
+            'Xianyun'
         ]
         for allowed_action in allow_list:
             if action_name.find(allowed_action) > -1:
@@ -224,14 +225,17 @@ class XiaoFaruzanFurinaRotation:
         self.generate_timeline()
 
         for action in self.timeline:
-            action_name, fanfare = action[1]()
+            action_name, fanfare = action[1](action[0])
             fanfare = min(300.0, fanfare)
             results = []
             if self.should_print(action_name):
-                results.append('{}: {} Fanfare'.format(action_name, math.floor(fanfare)))
+                results.append("{}: {} Fanfare".format(action_name, math.floor(fanfare)))
             
             for x in sorted(results):
                 print(x)
+
+        # for character in self.characters:
+        #     print("{} {}".format(character.name, character.current_hp/character.max_hp))
 
 class JeanC0(XiaoFaruzanFurinaRotation):
     """
@@ -243,7 +247,7 @@ class JeanC0(XiaoFaruzanFurinaRotation):
         self.jean = Character("Jean", 21441.0, current_hp)
         self.characters = [self.xiao, self.faruzan, self.furina, self.jean]
 
-    def JeanBurst(self, heal_amount=14052.0):
+    def JeanBurst(self, time, heal_amount=14052.0):
         """
         Jean's Burst on-cast heal.
         """
@@ -251,7 +255,7 @@ class JeanC0(XiaoFaruzanFurinaRotation):
             self.fanfare += character.heal(heal_amount)
         return "Jean Burst", self.fanfare
     
-    def JeanBurstTick(self, heal_amount=1405.0):
+    def JeanBurstTick(self, time, heal_amount=1405.0):
         """
         Jean's Burst heal ticks.
         """
@@ -260,25 +264,25 @@ class JeanC0(XiaoFaruzanFurinaRotation):
         return "Jean Tick", self.fanfare
 
     def generate_timeline(self):
-        super().generate_timeline()
+        super().generate_timeline(xiao_start=7.00)
         
         # Jean Burst
-        self.add(0.01, self.JeanBurst)
+        self.add(6.0, self.JeanBurst)
 
         # Jean Burst Ticks
         for i in range(10):
-            self.add(1.01 + 1.0 * i, self.JeanBurstTick)
+            self.add(6.0 + 1.0 * i, self.JeanBurstTick)
         
 class JeanC4(JeanC0):
     """
     Rotation with C4 Jean.
     """
-    def JeanBurst(self):
+    def JeanBurst(self, time):
         for character in self.characters:
             self.fanfare += character.heal(16847.0)
         return "Jean Burst", self.fanfare
 
-    def JeanBurstTick(self):
+    def JeanBurstTick(self, time):
         self.fanfare += self.xiao.heal(1685.0)
         self.FurinaA1(self.xiao)
         return "Jean Tick", self.fanfare
@@ -294,7 +298,7 @@ class Bennett(XiaoFaruzanFurinaRotation):
         self.characters = [self.xiao, self.faruzan, self.furina, self.bennett]
         self.bennett_tick = 0
     
-    def BennettBurstTick(self):
+    def BennettBurstTick(self, time):
         """
         Bennett's Burst heal ticks.
         """
@@ -311,17 +315,84 @@ class Bennett(XiaoFaruzanFurinaRotation):
         return "Bennett Tick", self.fanfare
 
     def generate_timeline(self):
-        super().generate_timeline()
+        super().generate_timeline(xiao_start=7.00)
         
         # Bennett Burst Ticks
         # First one heals Bennett
-        self.add(0.0, self.BennettBurstTick)
+        self.add(6.0, self.BennettBurstTick)
         for i in range(11):
             # First heal tick for Xiao comes on his second E
-            self.add(0.9 + 1.0 * i, self.BennettBurstTick)
+            self.add(6.0 + 1.0 * i, self.BennettBurstTick)
+
+class XianyunC0Crane(XiaoFaruzanFurinaRotation):
+    """
+    Rotation with C0 Xianyun with R1 Crane.
+    """
+    def __init__(self, current_hp: float = 1.0):
+        super().__init__(current_hp)
+        self.furina = Character("Furina", 34561.0, current_hp)
+        self.xianyun = Character("Xianyun", 16730.0, current_hp)
+        self.characters = [self.xiao, self.faruzan, self.furina, self.xianyun]
+
+    def XianyunEP(self, time):
+        return "Xianyun EP", self.fanfare
+    
+    def XianyunBurst(self, time, heal=7905.0):
+        for character in self.characters:
+            self.fanfare += character.heal(heal)
+        return "Xianyun Burst", self.fanfare
+
+    def XianyunBurstTick(self, time, heal_amount_4no=3686.0, heal_amount=3529.0):
+        heal = heal_amount_4no if time < 6.817 + 10.0 else heal_amount
+        for character in self.characters:
+            self.fanfare += character.heal(heal)
+        return "Xianyun Burst Tick", self.fanfare
+    
+    def generate_timeline(self):
+        super().generate_timeline()
+
+        # Xianyun EP
+        self.add(5.467, self.XianyunEP)
+        
+        # Xianyun Burst
+        self.add(6.817, self.XianyunBurst)
+
+        # Xianyun Burst Ticks
+        for i in range(6):
+            self.add(6.817 + 2.5 * (i + 1), self.XianyunBurstTick)
+
+class XianyunC0TTDS(XianyunC0Crane):
+    """
+    Rotation with C0 Xianyun with R5 TTDS.
+    """
+    def __init__(self, current_hp: float = 1.0):
+        super().__init__(current_hp)
+        self.xianyun = Character("Xianyun", 20394.0, current_hp)
+
+    def XianyunBurst(self, time):
+        return super().XianyunBurst(time, heal=5823.0)
+
+    def XianyunBurstTick(self, time):
+        return super().XianyunBurstTick(time, heal_amount_4no=2716.0, heal_amount=2608.0)
+
+class XianyunC0CraneXiaoHoma(XianyunC0Crane):
+    """
+    Rotation with C0 Xianyun with R1 Crane and Xiao on R1 Homa.
+    """
+    def __init__(self, current_hp: float = 1.0):
+        super().__init__(current_hp)
+        self.xiao = Character("Xiao", 21835.0, current_hp)
+
+class XianyunC0TTDSXiaoHoma(XianyunC0TTDS):
+    """
+    Rotation with C0 Xianyun with R5 TTDS and Xiao on R1 Homa.
+    """
+    def __init__(self, current_hp: float = 1.0):
+        super().__init__(current_hp)
+        self.xiao = Character("Xiao", 21835.0, current_hp)
 
 def main():
-    rotation = JeanC0(1.0)
+    rotation = Bennett(1.0)
     rotation.run()
 
 if __name__ == '__main__':
