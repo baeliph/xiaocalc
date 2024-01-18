@@ -1,0 +1,56 @@
+0.000 | Faruzan Burst: 0 Fanfare
+1.000 | Faruzan Skill 1: 0 Fanfare
+3.407 | Furina Seahorse 1 (4 drained): 0 Fanfare
+4.000 | Faruzan Skill 2: 0 Fanfare
+4.067 | Furina Burst: 0 Fanfare
+4.597 | Furina Seahorse 2 (4 drained): 6 Fanfare
+5.117 | Furina Octopus 1 (4 drained): 16 Fanfare
+5.467 | Xianyun EP: 16 Fanfare
+5.787 | Furina Seahorse 3 (4 drained): 22 Fanfare
+6.817 | Xianyun Burst: 51 Fanfare
+6.977 | Furina Seahorse 4 (4 drained): 57 Fanfare
+7.000 | Faruzan Skill 3: 57 Fanfare
+7.017 | Furina Crab 1 (4 drained): 72 Fanfare
+7.650 | Xiao E: 72 Fanfare
+8.017 | Furina Octopus 2 (4 drained): 81 Fanfare
+8.150 | Xiao E: 81 Fanfare
+8.167 | Furina Seahorse 5 (4 drained): 88 Fanfare
+9.317 | Xianyun Burst Tick: 127 Fanfare
+9.357 | Furina Seahorse 6 (4 drained): 133 Fanfare
+10.000 | Faruzan Skill 4: 133 Fanfare
+10.430 | Xiao Plunge 1: 136 Fanfare
+10.547 | Furina Seahorse 7 (4 drained): 142 Fanfare
+10.917 | Furina Octopus 3 (4 drained): 152 Fanfare
+11.597 | Xiao Plunge 2: 154 Fanfare
+11.737 | Furina Seahorse 8 (4 drained): 160 Fanfare
+11.817 | Furina Crab 2 (4 drained): 175 Fanfare
+11.817 | Xianyun Burst Tick: 218 Fanfare
+12.764 | Xiao Plunge 3: 220 Fanfare
+12.927 | Furina Seahorse 9 (4 drained): 227 Fanfare
+13.000 | Faruzan Skill 5: 227 Fanfare
+13.817 | Furina Octopus 4 (4 drained): 238 Fanfare
+13.931 | Xiao Plunge 4: 238 Fanfare
+14.117 | Furina Seahorse 10 (4 drained): 245 Fanfare
+14.317 | Xianyun Burst Tick: 270 Fanfare
+15.098 | Xiao Plunge 5: 270 Fanfare
+15.307 | Furina Seahorse 11 (4 drained): 278 Fanfare
+16.000 | Faruzan Skill 6: 278 Fanfare
+16.265 | Xiao Plunge 6: 278 Fanfare
+16.497 | Furina Seahorse 12 (4 drained): 287 Fanfare
+16.617 | Furina Crab 3 (4 drained): 300 Fanfare
+16.717 | Furina Octopus 5 (4 drained): 300 Fanfare
+16.817 | Xianyun Burst Tick: 300 Fanfare
+17.432 | Xiao Plunge 7: 300 Fanfare
+17.687 | Furina Seahorse 13 (4 drained): 300 Fanfare
+18.599 | Xiao Plunge 8: 300 Fanfare
+19.000 | Faruzan Skill 7: 300 Fanfare
+19.317 | Xianyun Burst Tick: 300 Fanfare
+19.617 | Furina Octopus 6 (4 drained): 300 Fanfare
+19.766 | Xiao Plunge 9: 300 Fanfare
+20.933 | Xiao Plunge 10: 300 Fanfare
+21.417 | Furina Crab 4 (4 drained): 300 Fanfare
+21.817 | Xianyun Burst Tick: 300 Fanfare
+22.067 | Furina Burst End: 0 Fanfare
+22.100 | Xiao Plunge 11: 0 Fanfare
+22.517 | Furina Octopus 7 (4 drained): 0 Fanfare
+23.267 | Xiao Plunge 12: 0 Fanfare

@@ -1,0 +1,49 @@
+0.000 | Faruzan Burst: 0 Fanfare
+1.000 | Faruzan Skill 1: 0 Fanfare
+3.407 | Furina Seahorse 1 (0 drained): 0 Fanfare
+4.000 | Faruzan Skill 2: 0 Fanfare
+4.067 | Furina Burst: 0 Fanfare
+4.597 | Furina Seahorse 2 (0 drained): 0 Fanfare
+5.117 | Furina Octopus 1 (0 drained): 0 Fanfare
+5.787 | Furina Seahorse 3 (0 drained): 0 Fanfare
+6.000 | Jean Burst: 197 Fanfare
+6.750 | Xiao E: 199 Fanfare
+6.977 | Furina Seahorse 4 (4 drained): 206 Fanfare
+7.000 | Faruzan Skill 3: 206 Fanfare
+7.017 | Furina Crab 1 (4 drained): 227 Fanfare
+7.250 | Xiao E: 227 Fanfare
+8.017 | Furina Octopus 2 (4 drained): 246 Fanfare
+8.167 | Furina Seahorse 5 (4 drained): 252 Fanfare
+9.357 | Furina Seahorse 6 (4 drained): 274 Fanfare
+9.530 | Xiao Plunge 1: 276 Fanfare
+10.000 | Faruzan Skill 4: 276 Fanfare
+10.547 | Furina Seahorse 7 (4 drained): 295 Fanfare
+10.697 | Xiao Plunge 2: 295 Fanfare
+10.917 | Furina Octopus 3 (4 drained): 300 Fanfare
+11.737 | Furina Seahorse 8 (4 drained): 300 Fanfare
+11.817 | Furina Crab 2 (4 drained): 300 Fanfare
+11.864 | Xiao Plunge 3: 300 Fanfare
+12.927 | Furina Seahorse 9 (4 drained): 300 Fanfare
+13.000 | Faruzan Skill 5: 300 Fanfare
+13.031 | Xiao Plunge 4: 300 Fanfare
+13.817 | Furina Octopus 4 (4 drained): 300 Fanfare
+14.117 | Furina Seahorse 10 (4 drained): 300 Fanfare
+14.198 | Xiao Plunge 5: 300 Fanfare
+15.307 | Furina Seahorse 11 (4 drained): 300 Fanfare
+15.365 | Xiao Plunge 6: 300 Fanfare
+16.000 | Faruzan Skill 6: 300 Fanfare
+16.497 | Furina Seahorse 12 (4 drained): 300 Fanfare
+16.532 | Xiao Plunge 7: 300 Fanfare
+16.617 | Furina Crab 3 (4 drained): 300 Fanfare
+16.717 | Furina Octopus 5 (4 drained): 300 Fanfare
+17.687 | Furina Seahorse 13 (4 drained): 300 Fanfare
+17.699 | Xiao Plunge 8: 300 Fanfare
+18.866 | Xiao Plunge 9: 300 Fanfare
+19.000 | Faruzan Skill 7: 300 Fanfare
+19.617 | Furina Octopus 6 (4 drained): 300 Fanfare
+20.033 | Xiao Plunge 10: 300 Fanfare
+21.200 | Xiao Plunge 11: 300 Fanfare
+21.417 | Furina Crab 4 (4 drained): 300 Fanfare
+22.067 | Furina Burst End: 0 Fanfare
+22.367 | Xiao Plunge 12: 0 Fanfare
+22.517 | Furina Octopus 7 (4 drained): 0 Fanfare

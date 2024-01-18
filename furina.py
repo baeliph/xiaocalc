@@ -1,5 +1,6 @@
 from bisect import insort
 import math
+import os
 
 class Character:
     """
@@ -89,6 +90,17 @@ class XiaoFaruzanFurinaRotation:
         self.furina_seahorse = 0
         self.furina_octopus = 0
         self.furina_crab = 0
+        self.furina_burst = False
+
+    def FurinaBurst(self, time):
+        self.furina_burst = True
+        self.fanfare = 0.0
+        return "Furina Burst", self.fanfare
+
+    def FurinaBurstEnd(self, time):
+        self.furina_burst = False
+        self.fanfare = 0.0
+        return "Furina Burst End", self.fanfare
 
     def FurinaSeaHorse(self, time):
         """
@@ -146,6 +158,9 @@ class XiaoFaruzanFurinaRotation:
         self.plunge += 1
         return "Xiao Plunge {}".format(self.plunge), self.fanfare
     
+    def FaruzanBurst(self, time):
+        return "Faruzan Burst", self.fanfare
+    
     def FaruzanSkill(self, time):
         """
         C6 Faruzan's Elemental Skill.
@@ -196,7 +211,14 @@ class XiaoFaruzanFurinaRotation:
         # Furina Crab
         for i in range(4):
             self.add(2.217 + 4.800 * (i + 1), self.FurinaCrab)
+
+        # Furina Burst
+        self.add(4.067, self.FurinaBurst)
+        self.add(22.067, self.FurinaBurstEnd)
         
+        # Faruzan Burst
+        self.add(0.0, self.FaruzanBurst)
+
         # Faruzan Skill
         for i in range(7):
             self.add(1.0 + 3.0 * i, self.FaruzanSkill)
@@ -211,7 +233,8 @@ class XiaoFaruzanFurinaRotation:
             'Jean Burst',
             'Furina',
             'Faruzan',
-            'Xianyun'
+            'Xianyun',
+            'Bennett'
         ]
         for allowed_action in allow_list:
             if action_name.find(allowed_action) > -1:
@@ -224,15 +247,17 @@ class XiaoFaruzanFurinaRotation:
         """
         self.generate_timeline()
 
+        results = []
         for action in self.timeline:
             action_name, fanfare = action[1](action[0])
-            fanfare = min(300.0, fanfare)
-            results = []
+            fanfare = math.floor(min(300.0, fanfare)) if self.furina_burst else 0.0
             if self.should_print(action_name):
-                results.append("{}: {} Fanfare".format(action_name, math.floor(fanfare)))
+                results.append("{:.3f} | {}: {} Fanfare".format(action[0], action_name, math.floor(fanfare)))
             
-            for x in sorted(results):
-                print(x)
+        for x in results:
+            print(x)
+            
+        return results
 
         # for character in self.characters:
         #     print("{} {}".format(character.name, character.current_hp/character.max_hp))
@@ -264,7 +289,7 @@ class JeanC0(XiaoFaruzanFurinaRotation):
         return "Jean Tick", self.fanfare
 
     def generate_timeline(self):
-        super().generate_timeline(xiao_start=7.00)
+        super().generate_timeline(xiao_start=6.75)
         
         # Jean Burst
         self.add(6.0, self.JeanBurst)
@@ -298,6 +323,12 @@ class Bennett(XiaoFaruzanFurinaRotation):
         self.characters = [self.xiao, self.faruzan, self.furina, self.bennett]
         self.bennett_tick = 0
     
+    def BennettBurst(self, time):
+        """
+        Bennett's Burst.
+        """
+        return "Bennett Burst", self.fanfare
+    
     def BennettBurstTick(self, time):
         """
         Bennett's Burst heal ticks.
@@ -315,7 +346,9 @@ class Bennett(XiaoFaruzanFurinaRotation):
         return "Bennett Tick", self.fanfare
 
     def generate_timeline(self):
-        super().generate_timeline(xiao_start=7.00)
+        super().generate_timeline(xiao_start=6.75)
+
+        self.add(6.0, self.BennettBurst)
         
         # Bennett Burst Ticks
         # First one heals Bennett
@@ -391,9 +424,33 @@ class XianyunC0TTDSXiaoHoma(XianyunC0TTDS):
         super().__init__(current_hp)
         self.xiao = Character("Xiao", 21835.0, current_hp)
 
+def output_result_to_file(directory, filename, results):
+    """
+    Write results to specified directory/filename.
+    """
+    filename = '{}/{}.txt'.format(directory, filename)
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, "w", encoding='UTF8', newline='\n') as outfile:
+        for result in results:
+            outfile.write(f"{result}\n")
+
 def main():
-    rotation = Bennett(1.0)
-    rotation.run()
+    configs = {
+        "JeanC0_100": JeanC0(1.0),
+        "JeanC0_50": JeanC0(0.5),
+        "JeanC4_100": JeanC4(1.0),
+        "JeanC4_50": JeanC4(0.5),
+        "Bennett_100": Bennett(1.0),
+        "Bennett_50": Bennett(0.5),
+        "XianyunCrane": XianyunC0Crane(1.0),
+        "XianyunTTDS": XianyunC0TTDS(1.0),
+        "XianyunCrane_Homa": XianyunC0CraneXiaoHoma(1.0),
+        "XianyunTTDS_Homa": XianyunC0TTDSXiaoHoma(1.0)
+    }
+    for (config_name, rotation) in configs.items():
+        print(f"\n{config_name}")
+        results = rotation.run()
+        output_result_to_file("fanfare", config_name, results)
 
 if __name__ == '__main__':
     main()
