@@ -1,6 +1,7 @@
 from bisect import insort
 import math
 import os
+import csv
 
 class Character:
     """
@@ -248,19 +249,22 @@ class XiaoFaruzanFurinaRotation:
         self.generate_timeline()
 
         results = []
+        hp_timeline = [["Xiao", "Faruzan", "Furina", "Flex"]]
         for action in self.timeline:
             action_name, fanfare = action[1](action[0])
             fanfare = math.floor(min(300.0, fanfare)) if self.furina_burst else 0.0
+            if action_name.find("Xiao Plunge") > -1:
+                hp_vals = []
+                for character in self.characters:
+                    hp_vals.append(character.current_hp/character.max_hp)
+                hp_timeline.append(hp_vals)
             if self.should_print(action_name):
                 results.append("{:.3f} | {}: {} Fanfare".format(action[0], action_name, math.floor(fanfare)))
             
         for x in results:
             print(x)
             
-        return results
-
-        # for character in self.characters:
-        #     print("{} {}".format(character.name, character.current_hp/character.max_hp))
+        return results, hp_timeline
 
 class JeanC0(XiaoFaruzanFurinaRotation):
     """
@@ -434,6 +438,16 @@ def output_result_to_file(directory, filename, results):
         for result in results:
             outfile.write(f"{result}\n")
 
+def write_csv(directory, filename, data):
+    """
+    Write data as CSV to specified directory/filename.
+    """
+    filename = '{}/{}'.format(directory, filename)
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, "w", encoding='UTF8', newline='') as outfile:
+        writer = csv.writer(outfile)
+        writer.writerows(data)
+
 def main():
     configs = {
         "JeanC0_100": JeanC0(1.0),
@@ -449,8 +463,9 @@ def main():
     }
     for (config_name, rotation) in configs.items():
         print(f"\n{config_name}")
-        results = rotation.run()
+        results, hp_timeline = rotation.run()
         output_result_to_file("fanfare", config_name, results)
+        write_csv("hp", config_name, hp_timeline)
 
 if __name__ == '__main__':
     main()
