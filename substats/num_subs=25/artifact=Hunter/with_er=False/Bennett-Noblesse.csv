@@ -19,6 +19,11 @@ Homa,R2,1,10,14
 Homa,R3,1,10,14
 Homa,R4,0,10,15
 Homa,R5,0,10,15
+LumidouceElegy,R1,2,2,21
+LumidouceElegy,R2,1,2,22
+LumidouceElegy,R3,1,2,22
+LumidouceElegy,R4,1,2,22
+LumidouceElegy,R5,0,2,23
 "Vortex (Shielded, Stacked)",R1,0,10,15
 "Vortex (Shielded, Stacked)",R2,0,10,15
 "Vortex (Shielded, Stacked)",R3,0,10,15

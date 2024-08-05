@@ -171,6 +171,15 @@ class StaffOfTheScarletSands(Weapon):
     def dynamic_stats(self, num_hits, stats: Stats):
         atk_increase = self._stat(0.52, 0.13) + self._stat(0.28, 0.07) * self.rotation.soss_stacks(num_hits)
         return Stats(flat_atk=atk_increase * stats.em)
+    
+class LumidouceElegy(Weapon):
+    """
+    Lumidouce Elegy.
+    """
+
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
+        self.base_stats = Stats(base_atk=608, crate=0.331, atk=self._stat(0.15, 0.04))
 
 class Lithic(Weapon):
     """

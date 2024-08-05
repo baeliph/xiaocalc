@@ -145,8 +145,6 @@ if __name__ == '__main__':
 
     rotation = EE12HP()
 
-    artifact_set = VermillionAtkGoblet
-
     buff_combos = [
         # [Solo],
         # [TTDS],
@@ -159,38 +157,40 @@ if __name__ == '__main__':
         [FurinaC050HP, FaruzanC6, Noblesse]
     ]
 
-    weapons = [
-        partial(PJWS, stacked=True),
-        partial(PJWS),
-        partial(Homa, below50=True),
-        partial(Homa),
-        partial(Vortex, shielded=True, stacked=True),
-        partial(Vortex, shielded=True, stacked=False),
-        partial(CalamityQueller, stacked=True),
-        partial(CalamityQueller, stacked=False),
-        partial(Vortex, shielded=False, stacked=True),
-        partial(Vortex, shielded=False, stacked=False),
-        partial(StaffOfTheScarletSands),
-        partial(SkywardSpine),
-        partial(EngulfingLightning),
-        partial(Lithic, stacks=4),
-        partial(Lithic, stacks=3),
-        partial(Lithic, stacks=2),
-        partial(Lithic, stacks=1),
-        partial(Deathmatch, num_opponents=1),
-        partial(Deathmatch, num_opponents=2),
-        partial(Blackcliff, stacks=3),
-        partial(Blackcliff, stacks=2),
-        partial(Blackcliff, stacks=1),
-        partial(Blackcliff, stacks=0),
-        partial(MissiveWindspear, passive_active=True),
-        partial(MissiveWindspear, passive_active=False),
-        partial(WavebreakersFin),
-        partial(FavoniusLance),
-        partial(PrototypeStarglitter),
-        partial(WhiteTassel)
-    ]
+    for artifact_set in [Vermillion, Hunter, AtkAtk, AnemoAnemo, AtkAnemo]:
+        weapons = [
+            partial(PJWS, stacked=True),
+            partial(PJWS),
+            partial(Homa, below50=True),
+            partial(Homa),
+            partial(LumidouceElegy),
+            partial(Vortex, shielded=True, stacked=True),
+            partial(Vortex, shielded=True, stacked=False),
+            partial(CalamityQueller, stacked=True),
+            partial(CalamityQueller, stacked=False),
+            partial(Vortex, shielded=False, stacked=True),
+            partial(Vortex, shielded=False, stacked=False),
+            partial(StaffOfTheScarletSands),
+            partial(SkywardSpine),
+            partial(EngulfingLightning),
+            partial(Lithic, stacks=4),
+            partial(Lithic, stacks=3),
+            partial(Lithic, stacks=2),
+            partial(Lithic, stacks=1),
+            partial(Deathmatch, num_opponents=1),
+            partial(Deathmatch, num_opponents=2),
+            partial(Blackcliff, stacks=3),
+            partial(Blackcliff, stacks=2),
+            partial(Blackcliff, stacks=1),
+            partial(Blackcliff, stacks=0),
+            partial(MissiveWindspear, passive_active=True),
+            partial(MissiveWindspear, passive_active=False),
+            partial(WavebreakersFin),
+            partial(FavoniusLance),
+            partial(PrototypeStarglitter),
+            partial(WhiteTassel)
+        ]
 
-    extra_er_subs = False # Change to True if you want to give ER weapons +5 subs
+        extra_er_subs = False # Change to True if you want to give ER weapons +5 subs
 
-    main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)
+        main(num_subs, artifact_set, buff_combos, weapons, rotation, extra_er_subs)
