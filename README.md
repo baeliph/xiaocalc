@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://media.discordapp.net/attachments/888517252230570084/888517346963107890/e15e3701f7179ef3f8b83bafe81bac62.png" alt="Logo" width="80" height="80">
+    <img src="https://media.discordapp.net/attachments/888517252230570084/888517346963107890/e15e3701f7179ef3f8b83bafe81bac62.png?ex=66b131c3&is=66afe043&hm=0f83e44c970f3d47b57e8094ef2ce832b0c499f921f36d11c79a0533843d0f69&=&format=webp&quality=lossless&width=375&height=375" alt="Logo" width="80" height="80">
   </a>
 
   <h1 align="center">Xiao Mains Weapon Calculations</h3>
@@ -56,12 +56,13 @@ Dynamic buff mappings per rotation can be found here: [Xiao Weapon Calc Buff Upt
 - All rolls are based on culminative amount of all 5 Artifacts with an expected outcome depending on how many substats were selected. Refer to bullet 2.
 
 ## Additional Resources
-- [Xiao Weapon Comparison (verm ver.)](https://docs.google.com/spreadsheets/d/17wSBGoVTChPta3LNMEelSqJcTkX3JS8lo9XWlpeapWU/edit#gid=1335423325) by Felician#5771
-- [Xiao Weapon Comparison](https://docs.google.com/spreadsheets/d/1CunnPmae9K4Zt-uLdI-wkBDVFVQufo5Oz1NSyU-YPA8/edit#gid=1748622433) by Coded#2644 and Orum#8459
+- [FFXX Weapon Comparison](https://docs.google.com/spreadsheets/d/1yeZFgWrXTxAvAVzvES36HXKf5qnwsPt-FS1QSxV3bQY/edit?usp=sharing) by felic1an
+- [Xiao Weapon Comparison (verm ver.)](https://docs.google.com/spreadsheets/d/17wSBGoVTChPta3LNMEelSqJcTkX3JS8lo9XWlpeapWU/edit#gid=1335423325) by felic1an
+- [Xiao Weapon Comparison](https://docs.google.com/spreadsheets/d/1CunnPmae9K4Zt-uLdI-wkBDVFVQufo5Oz1NSyU-YPA8/edit#gid=1748622433) by coded and orum
 - [Github to Coded#2644's script](https://github.com/Codexys/Xiao-Mains-Scripts)
 
 ## Acknowledgements
-- baeliph#8346: Converted weapon comparison sheets into a script.
-- Felician#5771: Updated sheet for 4pc Vermillion and version 3.1.
-- Coded#2644: Original weapon comparison and stat distribution scripts.
-- Orum#8459: Formatting of the organized Weapon Comparison Sheet.
+- baeliph: Converted weapon comparison sheets into a script.
+- felic1an: FFXX weapon comparisons and updated sheet for 4pc Vermillion and version 3.1.
+- coded: Original weapon comparison and stat distribution scripts.
+- orum: Formatting of the organized Weapon Comparison Sheet.
