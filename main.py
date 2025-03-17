@@ -151,15 +151,17 @@ if __name__ == '__main__':
         # [Bennett, Noblesse],
         # [TTDS, Bennett, Noblesse],
         # [FaruzanC2],
-        # [FaruzanC6],
-        # [Bennett, Noblesse, FaruzanC6],
-        [FurinaC0, FaruzanC6, Noblesse],
-        [FurinaC050HP, FaruzanC6, Noblesse]
+        # [FaruzanC6, TotM],
+        # [Bennett, Noblesse, FaruzanC6, TotM],
+        # [CraneXianyun, FaruzanC6, Noblesse, TotM, Bennett]
+        [FurinaC0, FaruzanC6, Noblesse, TotM],
+        [FurinaC050HP, FaruzanC6, Noblesse, TotM],
+        [FurinaWithXianyun, TTDSXianyun, TTDS, FaruzanC6, Noblesse, TotM],
+        [FurinaWithXianyun, CraneXianyun, FaruzanC6, Noblesse, TotM]
     ]
 
-    for artifact_set in [Vermillion, Hunter, AtkAtk, AnemoAnemo, AtkAnemo]:
+    for artifact_set in [AnemoAnemo, AtkAnemo, AtkAtk, Vermillion, LongNightOath, Hunter]:
         weapons = [
-            partial(PJWS, stacked=True),
             partial(PJWS),
             partial(Homa, below50=True),
             partial(Homa),

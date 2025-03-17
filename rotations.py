@@ -91,8 +91,14 @@ class EE12HP(Rotation):
         return min(num_plunge, 4)
     
     def hunter_stacks(self, num_hits):
-        num_plunge = num_hits - 1
-        return min(num_plunge, 3)
+        # num_plunge = num_hits - 1
+        # return min(num_plunge, 3)
+        # use flat 3 stacks for furina comps
+        return 3
+    
+    def long_night_oath_stacks(self, num_hits):
+        stacks = [0, 0, 2, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4]
+        return stacks[num_hits]
     
     def calamity_stacks(self, num_hits):
         if num_hits < 2:

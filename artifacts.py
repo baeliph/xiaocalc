@@ -101,3 +101,16 @@ class Hunter(Artifact):
     def dynamic_stats(self, num_hits=0):
         num_stacks = self.rotation.hunter_stacks(num_hits)
         return Stats(crate=0.12*num_stacks)
+
+class LongNightOath(Artifact):
+    """
+    4pc Long Night's Oath
+    """
+
+    def __init__(self, rotation: Rotation = EE12HP()):
+        super().__init__(rotation)
+
+    def dynamic_stats(self, num_hits=0):
+        plunge_dmg = 0.25 if num_hits > 1 else 0.0
+        num_stacks = self.rotation.long_night_oath_stacks(num_hits)
+        return Stats(bonus_dmg=plunge_dmg+num_stacks*0.15)

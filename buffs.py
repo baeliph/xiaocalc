@@ -61,6 +61,14 @@ class Noblesse(Buff):
     def active(self):
         return Stats(atk=0.20)
     
+class TotM(Buff):
+    """
+    4pc Tenacy of the Millileth buff. Gives 20% ATK.
+    """
+
+    def active(self):
+        return Stats(atk=0.20)
+    
 
 class TTDS(Buff):
     """
@@ -136,3 +144,20 @@ class FurinaC0(Buff):
 class FurinaC050HP(Buff):
     def buff(self, num_hits=0):
         return Stats(bonus_dmg=0.25 * (self.rotation.fanfare_50(num_hits) * 0.01))
+
+class FurinaWithXianyun(Buff):
+    def buff(self, num_hits=0):
+        furina_fanfare = [72, 81, 136, 155, 221, 240, 282, 290, 300, 300, 300, 300, 0, 0]
+        return Stats(bonus_dmg=0.0025*furina_fanfare[num_hits])    
+
+class TTDSXianyun(Buff):
+    def buff(self, num_hits=0):
+        xianyun_atk = [0, 0, 2967, 2967, 2967, 2967, 2967, 2967, 2967, 2820, 0, 0, 0, 0]
+        flat_dmg = xianyun_atk[num_hits]*2.0
+        return Stats(crate=(0.04 if num_hits > 1 else 0.0), flat_dmg=flat_dmg)
+
+class CraneXianyun(Buff):
+    def buff(self, num_hits=0):
+        xianyun_atk = [0, 0, 4296, 4296, 4296, 4296, 4296, 4296, 4296, 4080, 0, 0, 0, 0]
+        flat_dmg = xianyun_atk[num_hits]*2.0
+        return Stats(crate=(0.04 if num_hits > 1 else 0.0), flat_dmg=flat_dmg)
