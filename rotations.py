@@ -119,6 +119,13 @@ class EE12HP(Rotation):
         elif num_hits > 1 and num_hits < 9:
             return 2
         return 0
+    
+    def sacstaff_stacks(self, num_hits):
+        if num_hits == 1 or num_hits == 5:
+            return 1
+        elif num_hits > 1 and num_hits < 5:
+            return 2
+        return 0
 
     def fanfare(self, num_hits):
         num_plunge = num_hits - 1

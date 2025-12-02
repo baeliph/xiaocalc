@@ -181,6 +181,29 @@ class LumidouceElegy(Weapon):
         super().__init__(refine, rotation)
         self.base_stats = Stats(base_atk=608, crate=0.331, atk=self._stat(0.15, 0.04))
 
+class FracturedHalo(Weapon):
+    """
+    Fractured Halo.
+    """
+
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
+        self.base_stats = Stats(base_atk=608, cdmg=0.662, atk=self._stat(0.24, 0.06))
+
+class SacrificersStaff(Weapon):
+    """
+    Sacrificer's Staff.
+    """
+
+    def __init__(self, refine: int = 1, rotation: Rotation = EE12HP()):
+        super().__init__(refine, rotation)
+        self.base_stats = Stats(base_atk=620, crate=0.092)
+    
+    def dynamic_stats(self, num_hits, stats: Stats):
+        atk_increase = self._stat(0.08, 0.02) * self.rotation.sacstaff_stacks(num_hits)
+        return Stats(atk=atk_increase)
+
+
 class Lithic(Weapon):
     """
     Lithic Spear.

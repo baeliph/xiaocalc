@@ -14,6 +14,11 @@ Homa,R2,2,19,4
 Homa,R3,2,19,4
 Homa,R4,1,19,5
 Homa,R5,1,19,5
+FracturedHalo,R1,2,19,4
+FracturedHalo,R2,2,19,4
+FracturedHalo,R3,1,19,5
+FracturedHalo,R4,1,19,5
+FracturedHalo,R5,0,19,6
 LumidouceElegy,R1,2,11,12
 LumidouceElegy,R2,2,11,12
 LumidouceElegy,R3,2,11,12
@@ -64,6 +69,11 @@ EngulfingLightning,R2,0,17,8
 EngulfingLightning,R3,0,17,8
 EngulfingLightning,R4,0,17,8
 EngulfingLightning,R5,0,17,8
+SacrificersStaff,R1,3,14,8
+SacrificersStaff,R2,3,14,8
+SacrificersStaff,R3,3,14,8
+SacrificersStaff,R4,3,14,8
+SacrificersStaff,R5,2,14,9
 Lithic (4 Stacks),R1,0,15,10
 Lithic (4 Stacks),R2,0,15,10
 Lithic (4 Stacks),R3,0,14,11

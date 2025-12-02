@@ -1,7 +1,7 @@
 weapon,refine,atk,crate,cdmg
 PJWS,R1,1,4,20
 PJWS,R2,1,4,20
-PJWS,R3,1,4,20
+PJWS,R3,0,4,21
 PJWS,R4,0,4,21
 PJWS,R5,0,4,21
 Homa (50%),R1,0,10,15
@@ -9,15 +9,20 @@ Homa (50%),R2,0,10,15
 Homa (50%),R3,0,10,15
 Homa (50%),R4,0,10,15
 Homa (50%),R5,0,10,15
-Homa,R1,2,10,13
+Homa,R1,1,10,14
 Homa,R2,1,10,14
 Homa,R3,1,10,14
 Homa,R4,0,10,15
 Homa,R5,0,10,15
-LumidouceElegy,R1,2,2,21
+FracturedHalo,R1,1,10,14
+FracturedHalo,R2,0,10,15
+FracturedHalo,R3,0,10,15
+FracturedHalo,R4,0,10,15
+FracturedHalo,R5,0,10,15
+LumidouceElegy,R1,1,2,22
 LumidouceElegy,R2,1,2,22
 LumidouceElegy,R3,1,2,22
-LumidouceElegy,R4,1,2,22
+LumidouceElegy,R4,0,2,23
 LumidouceElegy,R5,0,2,23
 "Vortex (Shielded, Stacked)",R1,0,10,15
 "Vortex (Shielded, Stacked)",R2,0,10,15
@@ -54,16 +59,21 @@ StaffOfTheScarletSands,R2,3,0,22
 StaffOfTheScarletSands,R3,3,0,22
 StaffOfTheScarletSands,R4,3,0,22
 StaffOfTheScarletSands,R5,3,0,22
-SkywardSpine,R1,1,8,16
-SkywardSpine,R2,0,8,17
+SkywardSpine,R1,0,8,17
+SkywardSpine,R2,1,7,17
 SkywardSpine,R3,1,7,17
-SkywardSpine,R4,2,6,17
+SkywardSpine,R4,1,6,18
 SkywardSpine,R5,1,6,18
 EngulfingLightning,R1,0,10,15
 EngulfingLightning,R2,0,10,15
 EngulfingLightning,R3,0,10,15
 EngulfingLightning,R4,0,10,15
 EngulfingLightning,R5,0,10,15
+SacrificersStaff,R1,0,8,17
+SacrificersStaff,R2,0,8,17
+SacrificersStaff,R3,0,8,17
+SacrificersStaff,R4,0,8,17
+SacrificersStaff,R5,0,8,17
 Lithic (4 Stacks),R1,0,7,18
 Lithic (4 Stacks),R2,0,6,19
 Lithic (4 Stacks),R3,0,5,20
@@ -72,17 +82,17 @@ Lithic (4 Stacks),R5,0,3,22
 Lithic (3 Stacks),R1,0,8,17
 Lithic (3 Stacks),R2,0,7,18
 Lithic (3 Stacks),R3,0,6,19
-Lithic (3 Stacks),R4,0,6,19
+Lithic (3 Stacks),R4,0,5,20
 Lithic (3 Stacks),R5,0,5,20
-Lithic (2 Stacks),R1,0,9,16
+Lithic (2 Stacks),R1,0,8,17
 Lithic (2 Stacks),R2,0,8,17
-Lithic (2 Stacks),R3,0,8,17
+Lithic (2 Stacks),R3,0,7,18
 Lithic (2 Stacks),R4,0,7,18
-Lithic (2 Stacks),R5,0,7,18
+Lithic (2 Stacks),R5,0,6,19
 Lithic (1 Stacks),R1,0,9,16
 Lithic (1 Stacks),R2,0,9,16
 Lithic (1 Stacks),R3,0,9,16
-Lithic (1 Stacks),R4,0,9,16
+Lithic (1 Stacks),R4,0,8,17
 Lithic (1 Stacks),R5,0,8,17
 Deathmatch (1 Opponent),R1,0,1,24
 Deathmatch (1 Opponent),R2,0,1,24

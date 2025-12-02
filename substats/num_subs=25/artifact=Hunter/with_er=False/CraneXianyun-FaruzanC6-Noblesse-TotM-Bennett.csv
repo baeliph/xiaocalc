@@ -1,9 +1,9 @@
 weapon,refine,atk,crate,cdmg
-PJWS,R1,0,4,21
-PJWS,R2,0,4,21
-PJWS,R3,0,4,21
-PJWS,R4,0,4,21
-PJWS,R5,0,4,21
+PJWS,R1,0,3,22
+PJWS,R2,0,3,22
+PJWS,R3,0,3,22
+PJWS,R4,0,3,22
+PJWS,R5,0,3,22
 Homa (50%),R1,0,9,16
 Homa (50%),R2,0,9,16
 Homa (50%),R3,0,9,16
@@ -14,6 +14,11 @@ Homa,R2,0,9,16
 Homa,R3,0,9,16
 Homa,R4,0,9,16
 Homa,R5,0,9,16
+FracturedHalo,R1,0,9,16
+FracturedHalo,R2,0,9,16
+FracturedHalo,R3,0,9,16
+FracturedHalo,R4,0,9,16
+FracturedHalo,R5,0,9,16
 LumidouceElegy,R1,0,1,24
 LumidouceElegy,R2,0,1,24
 LumidouceElegy,R3,0,1,24
@@ -64,6 +69,11 @@ EngulfingLightning,R2,0,9,16
 EngulfingLightning,R3,0,9,16
 EngulfingLightning,R4,0,9,16
 EngulfingLightning,R5,0,9,16
+SacrificersStaff,R1,0,7,18
+SacrificersStaff,R2,0,7,18
+SacrificersStaff,R3,0,7,18
+SacrificersStaff,R4,0,7,18
+SacrificersStaff,R5,0,7,18
 Lithic (4 Stacks),R1,0,6,19
 Lithic (4 Stacks),R2,0,5,20
 Lithic (4 Stacks),R3,0,4,21

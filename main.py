@@ -153,11 +153,12 @@ if __name__ == '__main__':
         # [FaruzanC2],
         # [FaruzanC6, TotM],
         # [Bennett, Noblesse, FaruzanC6, TotM],
-        # [CraneXianyun, FaruzanC6, Noblesse, TotM, Bennett]
-        [FurinaC0, FaruzanC6, Noblesse, TotM],
-        [FurinaC050HP, FaruzanC6, Noblesse, TotM],
-        [FurinaWithXianyun, TTDSXianyun, TTDS, FaruzanC6, Noblesse, TotM],
-        [FurinaWithXianyun, CraneXianyun, FaruzanC6, Noblesse, TotM]
+        # [CraneXianyun, FaruzanC6, Noblesse, TotM, Bennett],
+        # [FurinaC0, FaruzanC6, Noblesse, TotM],
+        # [FurinaC050HP, FaruzanC6, Noblesse, TotM],
+        # [FurinaWithXianyun, TTDSXianyun, TTDS, FaruzanC6, Noblesse, TotM],
+        # [FurinaWithXianyun, CraneXianyun, FaruzanC6, Noblesse, TotM],
+        [FaruzanC6, CraneXianyun, Zhongli, Noblesse, TotM]
     ]
 
     for artifact_set in [AnemoAnemo, AtkAnemo, AtkAtk, Vermillion, LongNightOath, Hunter]:
@@ -165,6 +166,7 @@ if __name__ == '__main__':
             partial(PJWS),
             partial(Homa, below50=True),
             partial(Homa),
+            partial(FracturedHalo),
             partial(LumidouceElegy),
             partial(Vortex, shielded=True, stacked=True),
             partial(Vortex, shielded=True, stacked=False),
@@ -175,6 +177,7 @@ if __name__ == '__main__':
             partial(StaffOfTheScarletSands),
             partial(SkywardSpine),
             partial(EngulfingLightning),
+            partial(SacrificersStaff),
             partial(Lithic, stacks=4),
             partial(Lithic, stacks=3),
             partial(Lithic, stacks=2),

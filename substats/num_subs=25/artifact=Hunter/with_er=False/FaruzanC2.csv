@@ -1,24 +1,29 @@
 weapon,refine,atk,crate,cdmg
-PJWS,R1,8,4,13
+PJWS,R1,7,4,14
 PJWS,R2,7,4,14
 PJWS,R3,7,4,14
-PJWS,R4,7,4,14
+PJWS,R4,6,4,15
 PJWS,R5,6,4,15
 Homa (50%),R1,7,10,8
 Homa (50%),R2,6,10,9
 Homa (50%),R3,5,10,10
 Homa (50%),R4,4,10,11
 Homa (50%),R5,3,10,12
-Homa,R1,9,10,6
+Homa,R1,8,10,7
 Homa,R2,8,10,7
 Homa,R3,8,10,7
 Homa,R4,7,10,8
 Homa,R5,7,10,8
+FracturedHalo,R1,8,10,7
+FracturedHalo,R2,7,10,8
+FracturedHalo,R3,7,10,8
+FracturedHalo,R4,6,10,9
+FracturedHalo,R5,6,10,9
 LumidouceElegy,R1,9,1,15
 LumidouceElegy,R2,9,1,15
-LumidouceElegy,R3,9,1,15
-LumidouceElegy,R4,7,2,16
-LumidouceElegy,R5,7,2,16
+LumidouceElegy,R3,8,1,16
+LumidouceElegy,R4,8,1,16
+LumidouceElegy,R5,8,1,16
 "Vortex (Shielded, Stacked)",R1,0,10,15
 "Vortex (Shielded, Stacked)",R2,0,10,15
 "Vortex (Shielded, Stacked)",R3,0,10,15
@@ -33,7 +38,7 @@ CalamityQueller (Stacked),R1,3,10,12
 CalamityQueller (Stacked),R2,3,10,12
 CalamityQueller (Stacked),R3,2,10,13
 CalamityQueller (Stacked),R4,2,10,13
-CalamityQueller (Stacked),R5,2,10,13
+CalamityQueller (Stacked),R5,1,10,14
 CalamityQueller (Unstacked),R1,3,10,12
 CalamityQueller (Unstacked),R2,3,10,12
 CalamityQueller (Unstacked),R3,3,10,12
@@ -56,16 +61,21 @@ StaffOfTheScarletSands,R4,10,0,15
 StaffOfTheScarletSands,R5,10,0,15
 SkywardSpine,R1,7,8,10
 SkywardSpine,R2,8,7,10
-SkywardSpine,R3,8,7,10
+SkywardSpine,R3,7,7,11
 SkywardSpine,R4,8,6,11
 SkywardSpine,R5,8,6,11
 EngulfingLightning,R1,4,10,11
 EngulfingLightning,R2,3,10,12
 EngulfingLightning,R3,3,10,12
 EngulfingLightning,R4,2,10,13
-EngulfingLightning,R5,2,10,13
+EngulfingLightning,R5,1,10,14
+SacrificersStaff,R1,7,7,11
+SacrificersStaff,R2,7,7,11
+SacrificersStaff,R3,7,7,11
+SacrificersStaff,R4,7,7,11
+SacrificersStaff,R5,7,7,11
 Lithic (4 Stacks),R1,2,7,16
-Lithic (4 Stacks),R2,3,6,16
+Lithic (4 Stacks),R2,2,6,17
 Lithic (4 Stacks),R3,3,5,17
 Lithic (4 Stacks),R4,3,4,18
 Lithic (4 Stacks),R5,3,3,19
@@ -78,26 +88,26 @@ Lithic (2 Stacks),R1,3,8,14
 Lithic (2 Stacks),R2,3,8,14
 Lithic (2 Stacks),R3,3,7,15
 Lithic (2 Stacks),R4,3,7,15
-Lithic (2 Stacks),R5,4,6,15
+Lithic (2 Stacks),R5,3,6,16
 Lithic (1 Stacks),R1,3,9,13
 Lithic (1 Stacks),R2,3,9,13
 Lithic (1 Stacks),R3,3,9,13
-Lithic (1 Stacks),R4,4,8,13
+Lithic (1 Stacks),R4,3,8,14
 Lithic (1 Stacks),R5,3,8,14
-Deathmatch (1 Opponent),R1,8,1,16
+Deathmatch (1 Opponent),R1,7,1,17
 Deathmatch (1 Opponent),R2,7,1,17
-Deathmatch (1 Opponent),R3,7,1,17
+Deathmatch (1 Opponent),R3,6,1,18
 Deathmatch (1 Opponent),R4,6,1,18
-Deathmatch (1 Opponent),R5,6,1,18
-Deathmatch (2+ Opponents),R1,8,1,16
+Deathmatch (1 Opponent),R5,5,1,19
+Deathmatch (2+ Opponents),R1,9,0,16
 Deathmatch (2+ Opponents),R2,8,1,16
-Deathmatch (2+ Opponents),R3,8,1,16
+Deathmatch (2+ Opponents),R3,7,1,17
 Deathmatch (2+ Opponents),R4,7,1,17
 Deathmatch (2+ Opponents),R5,7,1,17
 Blackcliff (3 Stacks),R1,6,10,9
 Blackcliff (3 Stacks),R2,5,10,10
 Blackcliff (3 Stacks),R3,4,10,11
-Blackcliff (3 Stacks),R4,4,10,11
+Blackcliff (3 Stacks),R4,3,10,12
 Blackcliff (3 Stacks),R5,3,10,12
 Blackcliff (2 Stacks),R1,7,10,8
 Blackcliff (2 Stacks),R2,6,10,9
@@ -115,7 +125,7 @@ Blackcliff (0 Stacks),R3,9,10,6
 Blackcliff (0 Stacks),R4,9,10,6
 Blackcliff (0 Stacks),R5,9,10,6
 MissiveWindspear (On),R1,1,10,14
-MissiveWindspear (On),R2,1,10,14
+MissiveWindspear (On),R2,0,10,15
 MissiveWindspear (On),R3,0,10,15
 MissiveWindspear (On),R4,0,10,15
 MissiveWindspear (On),R5,0,10,15
@@ -129,11 +139,11 @@ WavebreakersFin,R2,5,10,10
 WavebreakersFin,R3,5,10,10
 WavebreakersFin,R4,5,10,10
 WavebreakersFin,R5,5,10,10
-FavoniusLance,R1,6,10,9
-FavoniusLance,R2,6,10,9
-FavoniusLance,R3,6,10,9
-FavoniusLance,R4,6,10,9
-FavoniusLance,R5,6,10,9
+FavoniusLance,R1,6,9,10
+FavoniusLance,R2,6,9,10
+FavoniusLance,R3,6,9,10
+FavoniusLance,R4,6,9,10
+FavoniusLance,R5,6,9,10
 PrototypeStarglitter,R1,5,10,10
 PrototypeStarglitter,R2,5,10,10
 PrototypeStarglitter,R3,5,10,10
